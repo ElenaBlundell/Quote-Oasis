@@ -1,0 +1,144 @@
+
+* {
+    /* box-sizing: border-box; */
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body{
+    background-color: #CBE4DE;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#menu-btn,
+#search-btn {
+    /* display: block; */
+    width: 2rem;
+    height: 2rem;
+}
+
+.logo {
+    font-size: 2rem;
+    margin: 0 2rem;
+}
+
+nav {
+    position: fixed;
+    background: #2E4F4F;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    width: 80%;
+    visibility: hidden;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all .3s;
+    text-align: center;
+}
+
+/* nav {
+    text-align: left;
+} */
+
+a {
+    text-decoration: none;
+}
+
+header {
+ background-color: #2C3333;
+ height: 20vh;
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ 
+}
+
+header a{
+    color: #CBE4DE;
+}
+
+.logo{
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.open-nav {
+    visibility: unset;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.carousel{
+    display: flex;
+    /* height: 30vh; */
+    text-align: center;
+    margin-bottom: 4rem;
+    color: #CBE4DE;
+    position: relative;
+}
+
+.carousel-actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-actions button {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.carousel .carousel-actions button#carousel-button-prev {
+    margin-left: 20px;
+}
+
+.carousel .carousel-actions button#carousel-button-next {
+    margin-right: 20px;   
+}
+
+.img-quote{
+    background-color: #2E4F4F;
+    background-blend-mode: multiply; 
+    background-size: cover;
+    font-size: .7rem;
+    padding: 1em 3em;
+}
+
+.img-quote-1{
+    background-image: url("images/plant-1.jpeg");
+}
+
+.img-quote-2{
+    background-image: url("images/plant-center.jpeg");
+}
+
+.img-quote-3{
+    background-image: url("images/plant-2.jpeg");
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    height: 80%;
+
+}
+
+#quote-block{
+    background-color: #0E8388;
+    color: #CBE4DE;
+    text-align: center;
+    width: 85%;
+    border-radius: 20px;
+}
+
+.quote{
+    font-style: italic;
+}
