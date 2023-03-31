@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/521f24c9b1.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,25 +15,33 @@
 </head>
 <body>
     <nav id="nav">
-        <div class="inner-wrapper">
+        <div id="exit-btn" class="inner-wrapper">
             <!-- <a href="https://www.flaticon.com/free-icons/back" title="back icons">Back icons created by Fuzzee - Flaticon</a> -->
-                <img id="exit-btn" src="images/left-arrow.png" alt="go back icon">
+                <img  src="images/left-arrow.png" alt="go back icon">
                 <p>Go back</p>
         </div>
        
          <ul clas="nav-list">
             <li class="nav-li-item selected"><a class="nav-link" href="#">Home</a></li>
             <li class="nav-list-item"><a class="nav-link" href="#">Popular topics</a></li>
-            <li class="nav-li-item"><a class="nav-link" href="#">Quote Authors</a></li>
-            <li class="nav-list-item"><a class="nav-link" href="#">Quote topics</a></li>
+            <li class="nav-li-item"><a class="nav-link" href="#">Favorite Authors</a></li>
+            <li class="nav-list-item"><a class="nav-link" href="#">All topics</a></li>
         </ul>
     </nav>
 
         <header>
             <!-- <a href="https://www.flaticon.com/free-icons/open-menu" title="open menu icons">Open menu icons created by Pixel perfect - Flaticon</a> -->
-            <img id="menu-btn" src="images/menu.png" alt="menu icon">
-            <a href="#" class="logo">My <span>Quote</span> of the <span>Day</span></a>
-            <img id="search-btn" src="images/find.png" alt="search icon">
+            <div class="top">
+                <img id="menu-btn" src="images/menu.png" alt="menu icon">
+                <h1 class="logo">My <span>Quote</span> of the <span>Day</span></h1>
+                <i id="search-btn" class="fa fa-search fa-lg" aria-hidden="true"></i>
+            </div>
+            <div class="search-container hidden" id="search-container">
+                <form>
+                    <input type="search" id="search-bar" placeholder="Search for a specific topic">
+                    <button type="submit"><i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
+                </form>
+            </div>
     
     </header>
     <main id="main">
@@ -44,21 +53,21 @@
                     <p>Maya Angelou</p>
                 </div>
             </div>
-            <div class="img-quote img-quote-2">
+            <div class="img-quote img-quote-2 none">
                 <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.</p>
                 <div class="author">
                     <img src="images/palm.png">
                     <p>Maya Angelou</p>
                 </div>
             </div>
-            <div class="img-quote img-quote-3">
+            <div class="img-quote img-quote-3 none">
                 <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.</p>
                 <div class="author">
                     <img src="images/palm.png">
                     <p>Maya Angelou</p>
                 </div>
             </div>
-            <div class="carousel-actions">
+            <div class="carousel-actions none">
                 <button id="carousel-button-prev" aria-label="Previous Slidex"><</button>
                 <button id="carousel-button-next" aria-label="Next Slide">></button>
             </div>
@@ -70,7 +79,7 @@
                 <p>Maya Angelou</p>
             </div>
         </div>
-        <button id="get-quote-btn">Today's quote</button>
+        <button id="get-quote-btn">Get a quote</button>
     </main>
     <script src="index.js"></script>
 </body>
