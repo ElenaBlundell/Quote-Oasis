@@ -5,6 +5,7 @@ const nav = get("nav")
 const exit = get("exit-btn")
 const searchBar = get("search-bar")
 const searchContainer = get("search-container")
+const carousel = get("carousel")
 
 const searchBtn = get("search-btn")
 
@@ -18,16 +19,19 @@ open.addEventListener("click", () => {
     quoteBtn.style.opacity = "1"
     searchContainer.style.visibility = "hidden"
     searchBtn.style.visibility = "visible"
+    carousel.style.position = "static"
 })
 
 exit.addEventListener("click", () => {
     nav.classList.remove('open-nav')
     quoteBtn.style.opacity = "0.5"
+    carousel.style.position = "relative"
 })
 
 searchBtn.addEventListener("click", () => {
     searchBtn.style.visibility = "hidden"
     searchContainer.style.visibility = "visible"
+    
 } )
 
 // function getAuthorImg(data){
@@ -63,3 +67,6 @@ quoteBtn.addEventListener("click", () => {
         quoteBlock.innerHTML = getQuoteHtml(data)
     })
 })
+
+
+

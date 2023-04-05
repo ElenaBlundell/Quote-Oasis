@@ -19,10 +19,6 @@ body{
     visibility: hidden;
 }
 
-.none{
-    display: none;
-}
-
 #menu-btn,
 #search-btn {
     /* display: block; */
@@ -73,6 +69,7 @@ body{
     margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .inner-wrapper img{
@@ -144,7 +141,7 @@ header h3 {
     text-align: center;
     margin-bottom: 4rem;
     color: #CBE4DE;
-    /* position: relative; change to static in JS when menu is open */
+    position: relative; 
 }
 
 .carousel-actions {
@@ -169,6 +166,11 @@ header h3 {
     background-color: transparent;
 }
 
+.none{
+    /* Should be placed after .corousel selector's rules so "display: flex;" will not affect it */
+    display: none;
+}
+
 .carousel-actions button:hover{
     transform: scale(1.2);
 }
@@ -187,6 +189,7 @@ header h3 {
     background-size: cover;
     font-size: 0.9rem;
     padding: 1em 2em;
+    /* box-shadow: 0 20px 6em inset #CBE4DE; */
 }
 
 .img-quote-1{
@@ -225,6 +228,12 @@ main{
 }
 
 #get-quote-btn{
+    padding: 0.7rem 1.2rem;
+    border-radius: 18px;
+}
+
+#get-quote-btn,
+.flex-card{
     border: none;
     color: #CBE4DE;
     font-size: 1.1rem;
@@ -233,15 +242,36 @@ main{
     box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
     background-color: #2E4F4F;
     opacity: 0.5;
-    border-radius: 18px;
+    border-radius: 5px;
     cursor: pointer;
-    padding: 0.7rem 1.2rem;
+}
+
+.flex-card{
+    padding: 0.7rem 2.7rem;
+    flex: 1 0 30%;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    text-align: center;
 }
 
 #get-quote-btn:hover,
-#get-quote-btn:focus{
+#get-quote-btn:focus,
+.flex-card:hover{
     transform: translateY(-2px);
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #2C3333 0 -3px 0 inset;
+}
+
+.flex-container{
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.5em;
+    
+
+    /* width: 90%;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); */
 }
   
 
