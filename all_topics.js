@@ -10,6 +10,7 @@ const searchContainer = get("search-container")
 
 const carousel = get("carousel")
 
+
 let flexCardsCollection = document.getElementsByClassName("flex-card")
 
 open.addEventListener("click", () => {
@@ -45,15 +46,14 @@ searchBtn.addEventListener("click", () => {
     carousel.style.position = "relative"
 } )
 
-// Popular Topics
-import {popularTopicsArr} from './data.js'
+// All Topics
+import {allTopicsArr} from './data.js'
 
-const popularTopics = get("popular-topics")
+const allTopics = get("all-topics")
 
 function makeTopicsGrid(){
-    popularTopicsArr.forEach(topic => {
-        console.log(topic)
-        popularTopics.innerHTML += `<div class="flex-card">
+    allTopicsArr.forEach(topic => {
+        allTopics.innerHTML += `<div class="flex-card">
             <p>${topic}</p>
         </div>`
     })
@@ -61,7 +61,7 @@ function makeTopicsGrid(){
 
 function topicQuoteHtml(data){
     
-    popularTopics.innerHTML = `<div id="quote-block">
+    allTopics.innerHTML = `<div id="quote-block">
         <p class="quote" id="quote">"${data.q}"</p>
         <div class="author">
             <img src="images/palm.png">
@@ -73,8 +73,8 @@ function topicQuoteHtml(data){
         <button id="get-pt-quote" class="btn">Get a quote</button>
     </div>    
     `
-    popularTopics.classList.remove("flex-container")
-    popularTopics.classList.add("topic-quote")
+    allTopics.classList.remove("flex-container")
+    allTopics.classList.add("topic-quote")
     getNextQuote()
 }
 
@@ -86,12 +86,10 @@ function getTopicQuotes(){
     const flexCardsArr = Array.from(flexCardsCollection)
     flexCardsArr.forEach(card => {
         card.addEventListener("click", () => {
-            fetch(`https://zenquotes.io/api/quotes/keyword=${popularTopicsArr[flexCardsArr.indexOf(card)]}`)
+            fetch(`https://zenquotes.io/api/quotes/keyword=${allTopicsArr[flexCardsArr.indexOf(card)]}`)
             .then(response => response.json())
             .then(data => {
-                console.log(popularTopicsArr[flexCardsArr.indexOf(card)])
                 topicQuotesArr = data
-                console.log(topicQuotesArr)
                 topicQuoteHtml(topicQuotesArr[0])
             })
         })
