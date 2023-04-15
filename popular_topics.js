@@ -15,7 +15,7 @@ let flexCardsCollection = document.getElementsByClassName("flex-card")
 open.addEventListener("click", () => {
     const flexCardsArr = Array.from(flexCardsCollection)
     nav.classList.add("open-nav")
-    searchContainer.style.visibility = "hidden"
+    searchContainer.classList.add("none")
     searchBtn.style.visibility = "visible"
     carousel.style.position = "static"
     flexCardsArr.forEach(card => {
@@ -40,7 +40,7 @@ exit.addEventListener("click", () => {
 
 searchBtn.addEventListener("click", () => {
     searchBtn.style.visibility = "hidden"
-    searchContainer.style.visibility = "visible"
+    searchContainer.classList.remove("none")
     nav.classList.remove('open-nav')
     carousel.style.position = "relative"
 } )
@@ -74,7 +74,7 @@ function topicQuoteHtml(data){
     </div>    
     `
     popularTopics.classList.remove("flex-container")
-    popularTopics.classList.add("topic-quote")
+    popularTopics.classList.add("quote-card")
     getNextQuote()
 }
 

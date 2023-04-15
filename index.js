@@ -17,7 +17,7 @@ const quoteBtn = get("get-quote-btn")
 open.addEventListener("click", () => {
     nav.classList.add("open-nav")
     quoteBtn.style.opacity = "1"
-    searchContainer.style.visibility = "hidden"
+    searchContainer.classList.add("none")
     searchBtn.style.visibility = "visible"
     carousel.style.position = "static"
 })
@@ -30,7 +30,7 @@ exit.addEventListener("click", () => {
 
 searchBtn.addEventListener("click", () => {
     searchBtn.style.visibility = "hidden"
-    searchContainer.style.visibility = "visible"
+    searchContainer.classList.remove("none")
     
 } )
 

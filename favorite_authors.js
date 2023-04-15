@@ -46,70 +46,71 @@ searchBtn.addEventListener("click", () => {
     carousel.style.position = "relative"
 } )
 
-// All Topics
-import {allTopicsArr} from './data.js'
+// Favorite Authors
+import {favoriteAuthorsArr} from './data.js'
 
-const allTopics = get("all-topics")
+const favoriteAuthors = get("favorite-authors")
 
 function makeTopicsGrid(){
-    allTopicsArr.forEach(topic => {
-        allTopics.innerHTML += `<div class="flex-card">
-            <p>${topic}</p>
+    favoriteAuthorsArr.forEach(author => {
+        favoriteAuthors.innerHTML += `<div class="flex-card">
+            <p>${author}</p>
         </div>`
     })
 }
 
-function topicQuoteHtml(data){
+function authorQuoteHtml(data){
     
-    allTopics.innerHTML = `<div id="quote-block">
-        <p class="quote" id="quote">"${data.q}"</p>
+    favoriteAuthors.innerHTML = `<div id="quote-block">
+        <p class="quote" id="quote">"${data.content}"</p>
         <div class="author">
             <img src="images/palm.png">
-        <p id="author">${data.a}</p>
+        <p id="author">${data.author}</p>
         </div>
     </div>
     <div class="btn-block">
-        <a id="back-all-topics" href="all_topics.html" class="btn">Go back</a>
-        <button id="get-topic-quote" class="btn">Get a quote</button>
+        <a id="back-favorite-authors" href="favorite_authors.html" class="btn">Go back</a>
+        <button id="get-author-quote" class="btn">Get a quote</button>
     </div>    
     `
-    allTopics.classList.remove("flex-container")
-    allTopics.classList.add("quote-card")
+    favoriteAuthors.classList.remove("flex-container")
+    favoriteAuthors.classList.add("quote-card")
     getNextQuote()
 }
 
 makeTopicsGrid()
 
-let topicQuotesArr = []
+let authorQuotesArr = []
 
-function getTopicQuotes(){
+function getAuthorQuotes(){
     const flexCardsArr = Array.from(flexCardsCollection)
     flexCardsArr.forEach(card => {
         card.addEventListener("click", () => {
-            fetch(`https://zenquotes.io/api/quotes/keyword=${allTopicsArr[flexCardsArr.indexOf(card)]}`)
-            .then(response => response.json())
-            .then(data => {
-                topicQuotesArr = data
-                topicQuoteHtml(topicQuotesArr[0])
+            // fetch(`https://zenquotes.io/api/quotes/keyword=${favoriteAuthorsArr[flexCardsArr.indexOf(card)]}`)
+            fetch(`https://api.quotable.io/quotes?author=${favoriteAuthorsArr[flexCardsArr.indexOf(card)]}`)
+                .then(response => response.json())
+                .then(data => {
+                    authorQuotesArr = data.results
+                    authorQuoteHtml(authorQuotesArr[0])
             })
         })
     })
 }
 
-getTopicQuotes()
+getAuthorQuotes()
 
 function getNextQuote(){
-    const getTopicQuote = get("get-topic-quote")
+    const getAuthorQuote = get("get-author-quote")
     const quote = get("quote")
     const author = get("author")
-    getTopicQuote.addEventListener("click", () => {
-        let nextQuote = topicQuotesArr.shift()
+    getAuthorQuote.addEventListener("click", () => {
+        let nextQuote = authorQuotesArr.shift()
         if (nextQuote) {
-            nextQuote = topicQuotesArr.shift()
-            quote.innerHTML = `"${nextQuote.q}"`
-            author.innerHTML = `${nextQuote.a}`
+            nextQuote = authorQuotesArr.shift()
+            quote.innerHTML = `"${nextQuote.content}"`
+            author.innerHTML = `${nextQuote.author}`
         }else{
-            getTopicQuote.disabled = true
+            getAuthorQuote.disabled = true
         } 
     })
 }
