@@ -19,6 +19,7 @@ open.addEventListener("click", () => {
     searchContainer.classList.add("none")
     searchBtn.style.visibility = "visible"
     carousel.style.position = "static"
+    carouselButtons.style.visibility = "hidden"
     flexCardsArr.forEach(card => {
         card.classList.add("disabled")
     })
@@ -30,6 +31,7 @@ open.addEventListener("click", () => {
 exit.addEventListener("click", () => {
     nav.classList.remove('open-nav')
     carousel.style.position = "relative"
+    carouselButtons.style.visibility = "visible"
     const flexCardsArr = Array.from(flexCardsCollection)
     flexCardsArr.forEach(card => {
         card.classList.remove("disabled")
@@ -45,6 +47,45 @@ searchBtn.addEventListener("click", () => {
     nav.classList.remove('open-nav')
     carousel.style.position = "relative"
 } )
+
+const slides = document.getElementsByClassName('carousel-item');
+let slidePosition = 0;
+const totalSlides = slides.length;
+const carouselButtons = get("carousel-buttons")
+
+document.getElementById('carousel-button-next').addEventListener('click', moveToNextSlide);
+document.getElementById('carousel-button-prev').addEventListener('click', moveToPrevSlide);
+
+function hideAllSlides() {
+    for (let slide of slides) {
+        slide.classList.remove('carousel-item-visible');
+        slide.classList.add('carousel-item-hidden');
+    }
+}
+
+function moveToNextSlide() {
+    hideAllSlides();
+    
+    if (slidePosition === totalSlides - 1) {
+        slidePosition = 0;
+    } else {
+        slidePosition++;
+    }
+    
+    slides[slidePosition].classList.add("carousel-item-visible");
+}
+
+function moveToPrevSlide() {
+    hideAllSlides();
+    
+    if (slidePosition === 0) {
+        slidePosition = totalSlides - 1;
+    } else {
+        slidePosition--;
+    }
+
+    slides[slidePosition].classList.add("carousel-item-visible");
+}
 
 // All Topics
 import {allTopicsArr} from './data.js'

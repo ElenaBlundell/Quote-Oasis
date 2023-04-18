@@ -48,6 +48,7 @@ body{
 
 .search-container{
     position: relative;
+    justify-self: flex-end;
 }
 
 .search-container button{
@@ -112,14 +113,16 @@ header {
  text-align: center;
  display: flex;
  flex-direction: column;
- justify-content: flex-end;
+ justify-content: space-around;
 }
 
 header .top{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 1rem;
+    align-self: center;
+    justify-content: center;
+    
 }
 
 header h3 {
@@ -139,7 +142,7 @@ header h3 {
     display: flex;
     /* height: 30vh; */
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
     color: #CBE4DE;
     position: relative; 
 }
@@ -183,13 +186,44 @@ header h3 {
     margin-right: 20px;   
 }
 
+.carousel .carousel-item,
+.carousel .carousel-item-hidden {
+    display: none;
+}
+
+.carousel .carousel-item-visible {
+    display: block;
+    animation: fadeVisibility 0.8s;
+}
+
+@keyframes fadeVisibility {
+    0% {
+        opacity: 0;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
 .img-quote{
     background-color: #2E4F4F;
     background-blend-mode: multiply; 
     background-size: cover;
     font-size: 0.9rem;
-    padding: 1em 2em;
+    padding: 0.5em 1.5em;
     /* box-shadow: 0 20px 6em inset #CBE4DE; */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+.img-quote p{
+    margin: 0.7em;
+}
+
+.img-quote img{
+    width: 2em;
 }
 
 .img-quote-1{
@@ -208,9 +242,11 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
-    height: 80%;
+    justify-content: center;
+}
 
+.main-home{
+    height: 35%;
 }
 
 #quote-block{
@@ -219,7 +255,7 @@ main{
     text-align: center;
     width: 85%;
     border-radius: 20px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     padding: 1rem 2rem;
 }
 
@@ -229,6 +265,7 @@ main{
 
 .btn{
     padding: 0.7rem 1.2rem;
+    font-size: 1rem;
     /* border-radius: 18px; */
 }
 
@@ -242,18 +279,18 @@ main{
 }
 
 .flex-card{
-    padding: 0.7rem 2.7rem;
+    padding: 0.2rem 2rem;
     flex: 1 0 30%;
-    margin-top: 0.5em;
+    margin-top: 0.3em;
     margin-right: 0.5em;
     text-align: center;
+    font-size: 0.9rem;
 }
 
 .btn,
 .flex-card{
     border: none;
     color: #CBE4DE;
-    font-size: 1.1rem;
     font-weight: bold;
     text-shadow: 2px 2px #2C3333;
     box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
