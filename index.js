@@ -14,10 +14,12 @@ const main = get("main")
 
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
+const addBtn = get("add-btn")
 
 open.addEventListener("click", () => {
     nav.classList.add("open-nav")
     quoteBtn.style.opacity = "1"
+    addBtn.style.opacity = "1"
     searchContainer.classList.add("none")
     searchBtn.style.visibility = "visible"
     carousel.style.position = "static"
@@ -27,12 +29,13 @@ open.addEventListener("click", () => {
 exit.addEventListener("click", () => {
     nav.classList.remove('open-nav')
     quoteBtn.style.opacity = "0.5"
+    addBtn.style.opacity = "0.5"
     carousel.style.position = "relative"
     carouselButtons.style.visibility = "visible"
 })
 
 searchBtn.addEventListener("click", () => {
-    searchBtn.style.visibility = "hidden"
+    // searchBtn.style.visibility = "hidden"
     searchContainer.classList.remove("none")
     
 } )
@@ -41,15 +44,63 @@ const slides = document.getElementsByClassName('carousel-item');
 let slidePosition = 0;
 const totalSlides = slides.length;
 const carouselButtons = get("carousel-buttons")
+const imgQuote2 = get("img-quote-2")
+const imgQuote3 = get("img-quote-3")
 
 
-document.getElementById('carousel-button-next').addEventListener('click', moveToNextSlide);
-document.getElementById('carousel-button-prev').addEventListener('click', moveToPrevSlide);
+document.getElementById('carousel-button-next').addEventListener("click", moveToNextSlide);
+document.getElementById('carousel-button-prev').addEventListener("click", moveToPrevSlide);
+
+const mediaQuerySmall = window.matchMedia("(max-width: 499px)")
+const mediaQueryMedium = window.matchMedia("(min-width: 500px)")
+const mediaQueryMediumL = window.matchMedia("(max-width: 749px)")
+const mediaQueryLarge = window.matchMedia("(min-width: 750px)")
+
+function handleScreenChangeSmall(e){
+    if (e.matches) {
+        console.log("It is small now!")
+        imgQuote2.classList.remove("carousel-item-visible")
+    }
+}
+
+function handleScreenChangeMedium(e){
+    if (e.matches){
+        console.log("Media Query Matched!")
+        imgQuote2.classList.add("carousel-item-visible") 
+    }
+  }
+
+ function handleScreenChangeMediumL(e){
+     if (e.matches){
+        console.log("it is mL now")
+        imgQuote3.classList.remove("carousel-item-visible")
+     }
+ } 
+
+function handleScreenChangeLarge(e){
+     if (e.matches) {
+         console.log("It's large now")
+         imgQuote3.classList.add("carousel-item-visible")
+     }
+ } 
+
+  // Register event listener
+  mediaQuerySmall.addEventListener("change", handleScreenChangeSmall)
+  mediaQueryMedium.addEventListener("change", handleScreenChangeMedium)
+  mediaQueryMediumL.addEventListener("change", handleScreenChangeMediumL)
+  mediaQueryLarge.addEventListener("change", handleScreenChangeLarge)
+  
+  // Initial check
+  handleScreenChangeSmall(mediaQuerySmall)
+  handleScreenChangeMedium(mediaQueryMedium)
+  handleScreenChangeMediumL(mediaQueryMediumL)
+  handleScreenChangeLarge(mediaQueryLarge)
+  
 
 function hideAllSlides() {
     for (let slide of slides) {
-        slide.classList.remove('carousel-item-visible');
-        slide.classList.add('carousel-item-hidden');
+        slide.classList.remove("carousel-item-visible");
+        slide.classList.add("carousel-item-hidden");
     }
 }
 
