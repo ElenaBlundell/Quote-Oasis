@@ -1,14 +1,14 @@
+import {baseUrl} from './data.js'
+
 const get = element => document.getElementById(element);
 
 const open = get("menu-btn")
 const nav = get("nav")
 const exit = get("exit-btn")
-const searchBar = get("search-bar")
-const searchContainer = get("search-container")
+
+
 const carousel = get("carousel")
-
-
-const searchBtn = get("search-btn")
+const searchIcon = get("search-icon")
 
 const main = get("main")
 
@@ -21,7 +21,7 @@ open.addEventListener("click", () => {
     quoteBtn.style.opacity = "1"
     addBtn.style.opacity = "1"
     searchContainer.classList.add("none")
-    searchBtn.style.visibility = "visible"
+    searchIcon.style.visibility = "visible"
     carousel.style.position = "static"
     carouselButtons.style.visibility = "hidden"
 })
@@ -34,11 +34,74 @@ exit.addEventListener("click", () => {
     carouselButtons.style.visibility = "visible"
 })
 
-searchBtn.addEventListener("click", () => {
-    // searchBtn.style.visibility = "hidden"
+searchIcon.addEventListener("click", () => {
+    // searchIcon.style.visibility = "hidden"
     searchContainer.classList.remove("none")
-    
 } )
+
+// SEARCH FIELD
+const searchContainer = get("search-container")
+const searchForm = get("search-form")
+const searchBar = get("search-bar")
+const searchBtn = get("search-btn")
+let authorsList = []
+let authorsSearchResult = []
+let quotesList = []
+
+getAuthorsList()
+
+searchForm.addEventListener("submit", function(e){
+    e.preventDefault()
+})
+
+searchBtn.addEventListener("click", function(){
+    console.log("button's clicked!")
+    authorsList.forEach(author => {
+        if (author.includes(searchBar.value)){
+            authorsSearchResult.push(author)
+        } else {
+            console.log("you are cool")
+        }
+        // authorsListHtml() : searchQuote()
+    })
+    console.log("you are cool too")
+    return (authorsSearchResult.length === 0) ? authorsListHtml() : searchQuote()
+})
+
+function authorsListHtml(){
+    authorsSearchResult.forEach(author => {
+        console.log("authorsListHtml got triggered")
+        main.innerHTML = `<p>YOU did it!</p>
+        `
+    })
+}
+
+function searchQuote(){
+    fetch(`${baseUrl}/search/quotes?query=${searchBar.value}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            data.results.forEach(result => quotesList.push(result.content))
+        })
+        console.log(quotesList)
+        console.log("Good Job!")
+    // getQuotesListHtml()
+}
+
+// function getQuotesListHtml()
+
+function getAuthorsList(){
+    fetch(`${baseUrl}/authors?sortBy=name`)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data.results)
+            data.results.forEach(result => authorsList.push(result.name))
+            console.log(authorsList)
+        })
+        console.log("getAuthorsList triggered")
+}
+
+// CAROUSEL OF SLIDES
 
 const slides = document.getElementsByClassName('carousel-item');
 let slidePosition = 0;
@@ -50,52 +113,6 @@ const imgQuote3 = get("img-quote-3")
 
 document.getElementById('carousel-button-next').addEventListener("click", moveToNextSlide);
 document.getElementById('carousel-button-prev').addEventListener("click", moveToPrevSlide);
-
-const mediaQuerySmall = window.matchMedia("(max-width: 499px)")
-const mediaQueryMedium = window.matchMedia("(min-width: 500px)")
-const mediaQueryMediumL = window.matchMedia("(max-width: 749px)")
-const mediaQueryLarge = window.matchMedia("(min-width: 750px)")
-
-function handleScreenChangeSmall(e){
-    if (e.matches) {
-        console.log("It is small now!")
-        imgQuote2.classList.remove("carousel-item-visible")
-    }
-}
-
-function handleScreenChangeMedium(e){
-    if (e.matches){
-        console.log("Media Query Matched!")
-        imgQuote2.classList.add("carousel-item-visible") 
-    }
-  }
-
- function handleScreenChangeMediumL(e){
-     if (e.matches){
-        console.log("it is mL now")
-        imgQuote3.classList.remove("carousel-item-visible")
-     }
- } 
-
-function handleScreenChangeLarge(e){
-     if (e.matches) {
-         console.log("It's large now")
-         imgQuote3.classList.add("carousel-item-visible")
-     }
- } 
-
-  // Register event listener
-  mediaQuerySmall.addEventListener("change", handleScreenChangeSmall)
-  mediaQueryMedium.addEventListener("change", handleScreenChangeMedium)
-  mediaQueryMediumL.addEventListener("change", handleScreenChangeMediumL)
-  mediaQueryLarge.addEventListener("change", handleScreenChangeLarge)
-  
-  // Initial check
-  handleScreenChangeSmall(mediaQuerySmall)
-  handleScreenChangeMedium(mediaQueryMedium)
-  handleScreenChangeMediumL(mediaQueryMediumL)
-  handleScreenChangeLarge(mediaQueryLarge)
-  
 
 function hideAllSlides() {
     for (let slide of slides) {
@@ -127,6 +144,8 @@ function moveToPrevSlide() {
 
     slides[slidePosition].classList.add("carousel-item-visible");
 }
+
+
 // function getAuthorImg(data){
 //     let authorImgSource = ""
 //     let author = data.author
@@ -153,7 +172,7 @@ function getQuoteHtml(data) {
     }
 
 quoteBtn.addEventListener("click", () => {
-    fetch ("https://api.quotable.io/random")
+    fetch (`${baseUrl}/random`)
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -162,4 +181,52 @@ quoteBtn.addEventListener("click", () => {
 })
 
 
+// RESPONSIVE DESIGN
+
+const mediaQuerySmall = window.matchMedia("(max-width: 499px)")
+const mediaQueryMedium = window.matchMedia("(min-width: 500px)")
+const mediaQueryMediumL = window.matchMedia("(max-width: 749px)")
+const mediaQueryLarge = window.matchMedia("(min-width: 750px)")
+
+function handleScreenChangeSmall(e){
+    if (e.matches) {
+        console.log("It is small now!")
+        imgQuote2.classList.remove("carousel-item-visible")
+    }
+}
+
+function handleScreenChangeMedium(e){
+    if (e.matches){
+        console.log("Media Query Matched!")
+        imgQuote2.classList.add("carousel-item-visible") 
+    }
+  }
+
+ function handleScreenChangeMediumL(e){
+     if (e.matches){
+        console.log("it is mL now")
+        imgQuote3.classList.remove("carousel-item-visible")
+        carouselButtons.style.visibility = "visible"
+     }
+ } 
+
+function handleScreenChangeLarge(e){
+     if (e.matches) {
+         console.log("It's large now")
+         imgQuote3.classList.add("carousel-item-visible")
+         carouselButtons.style.visibility = "hidden"
+     }
+ } 
+
+  // Register event listener
+  mediaQuerySmall.addEventListener("change", handleScreenChangeSmall)
+  mediaQueryMedium.addEventListener("change", handleScreenChangeMedium)
+  mediaQueryMediumL.addEventListener("change", handleScreenChangeMediumL)
+  mediaQueryLarge.addEventListener("change", handleScreenChangeLarge)
+  
+//   // Initial check
+//   handleScreenChangeSmall(mediaQuerySmall)
+//   handleScreenChangeMedium(mediaQueryMedium)
+//   handleScreenChangeMediumL(mediaQueryMediumL)
+//   handleScreenChangeLarge(mediaQueryLarge)
 

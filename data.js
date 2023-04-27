@@ -1,3 +1,5 @@
+const baseUrl = "https://api.quotable.io"
+
 const popularTopicsArr = ["Inspiration", "Love", "Happiness", "Success",
                        "Courage", "Confidence", "Leadership", "Change"]
 
@@ -11,4 +13,4 @@ const favoriteAuthorsArr = ["Confucius", "Albert Einstein", "Mark Twain",
                          "Saint Patrick", "Abraham Lincoln", "Maya Angelou", "Anne Frank",
                         "Oscar Wilde", "Theodore Roosevelt"]
 
-export {popularTopicsArr, allTopicsArr, favoriteAuthorsArr}
+export {baseUrl, popularTopicsArr, allTopicsArr, favoriteAuthorsArr}

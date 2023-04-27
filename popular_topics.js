@@ -5,7 +5,7 @@ const nav = get("nav")
 const exit = get("exit-btn")
 
 const searchBar = get("search-bar")
-const searchBtn = get("search-btn")
+const searchIcon = get("search-icon")
 const searchContainer = get("search-container")
 
 const carousel = get("carousel")
@@ -16,7 +16,7 @@ open.addEventListener("click", () => {
     const flexCardsArr = Array.from(flexCardsCollection)
     nav.classList.add("open-nav")
     searchContainer.classList.add("none")
-    searchBtn.style.visibility = "visible"
+    searchIcon.style.visibility = "visible"
     carousel.style.position = "static"
     carouselButtons.style.visibility = "hidden"
     flexCardsArr.forEach(card => {
@@ -40,8 +40,8 @@ exit.addEventListener("click", () => {
     btnArr.forEach(btn => btn.classList.remove("disabled"))
 })
 
-searchBtn.addEventListener("click", () => {
-    searchBtn.style.visibility = "hidden"
+searchIcon.addEventListener("click", () => {
+    searchIcon.style.visibility = "hidden"
     searchContainer.classList.remove("none")
     nav.classList.remove('open-nav')
     carousel.style.position = "relative"

@@ -20,7 +20,7 @@ body{
 }
 
 #menu-btn,
-#search-btn {
+#search-icon {
     /* display: block; */
     /* width: 2rem;
     height: 2rem; */
@@ -38,7 +38,11 @@ body{
 
 .search-container{
     align-self: center;
+    /* display: flex; */
+    /* justify-content: space-between; */
     width: 90%;
+    max-width: 500px;
+    /* padding: 0; */
 }
 
 #search-bar {
@@ -48,11 +52,12 @@ body{
     border-radius: 5px;
     background: transparent;
     width: 77%;
+    /* margin-right: 10px; */
 }
 
 .search-container button,
 #search-bar:hover{
-    padding: 1.05em;
+    padding: 1.04em;
     border: none;
     border-radius: 5px;
     background-color:#CBE4DE;
@@ -61,7 +66,7 @@ body{
 
 .search-container button{
     width: 20%;
-    padding: 1.05em 0;
+    padding: 1.04em 0;
 }
 
 .search-container button:hover{
@@ -122,7 +127,7 @@ header {
 header .top{
     width: 90%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     align-self: center;
 }
@@ -209,12 +214,9 @@ header h3 {
     }
 }
 
-@media (min-width: 600px){
-    .carousel{
-        
-    }
-    .img-quote-2{display:block;}
-}
+/* @media (min-width: 600px){
+   
+} */
 
 .img-quote{
     background-color: #2E4F4F;
@@ -266,6 +268,7 @@ h2{
     color: #CBE4DE;
     text-align: center;
     width: 90%;
+    max-width: 500px;
     border-radius: 20px;
     margin-bottom: 1.5rem;
     padding: 1rem 2rem;
