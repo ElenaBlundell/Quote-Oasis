@@ -40,6 +40,7 @@ searchIcon.addEventListener("click", () => {
 } )
 
 // SEARCH FIELD
+
 const searchContainer = get("search-container")
 const searchForm = get("search-form")
 const searchBar = get("search-bar")
@@ -59,13 +60,9 @@ searchBtn.addEventListener("click", function(){
     authorsList.forEach(author => {
         if (author.includes(searchBar.value)){
             authorsSearchResult.push(author)
-        } else {
-            console.log("you are cool")
-        }
-        // authorsListHtml() : searchQuote()
+        } 
     })
-    console.log("you are cool too")
-    return (authorsSearchResult.length === 0) ? authorsListHtml() : searchQuote()
+    return (authorsSearchResult.length === 0) ? searchQuote() : authorsListHtml()
 })
 
 function authorsListHtml(){
@@ -77,18 +74,38 @@ function authorsListHtml(){
 }
 
 function searchQuote(){
-    fetch(`${baseUrl}/search/quotes?query=${searchBar.value}`)
+    let pages = 0;
+    fetch(`${baseUrl}/search/quotes?query=${searchBar.value}&limit=150`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            data.results.forEach(result => quotesList.push(result.content))
+            pages = data.totalPages
+            // console.log(pages)
+            data.results.forEach(result => quotesList.push({"quote": result.content, "author": result.author}))
         })
         console.log(quotesList)
-        console.log("Good Job!")
-    // getQuotesListHtml()
+        console.log("searchQuote function got triggered")
+
+    getQuotesListHtml()
 }
 
-// function getQuotesListHtml()
+const topicName = get("topic-name")
+
+function getQuotesListHtml(){
+    topicName.textContent += searchBar.value.toLowerCase()
+    topicName.classList.remove("hidden")
+    
+    console.log(quotesList)
+    console.log(quotesList[0].quote)
+    console.log(JSON.parse(JSON.stringify(quotesList[0])))
+    
+    // quoteBlock.innerHTML = `<p class="quote">"${quotesList[0].quote}"</p>
+    //     <div class="author">
+    //         <img src="images/palm.png">
+    //     <p>${quotesList[0].author}</p>
+    //     </div>
+    //     `
+}
 
 function getAuthorsList(){
     fetch(`${baseUrl}/authors?sortBy=name`)
