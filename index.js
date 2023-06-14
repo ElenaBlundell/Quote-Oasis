@@ -57,7 +57,6 @@ function getAuthorsList(pageNum = 1) {
             data.results.forEach(result => authorsList.push(result.name))
             console.log(authorsList)
             if (pageNum !== data.totalPages){
-                // if (data.length !== 0){
                 pageNum++
                 return getAuthorsList(pageNum)
             }
