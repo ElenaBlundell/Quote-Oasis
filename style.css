@@ -1,18 +1,19 @@
-
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-body{
+body {
     background-color: #CBE4DE;
     font-family: 'Montserrat', sans-serif;
-    color:#CBE4DE;
+    color: #CBE4DE;
+    text-align: center;
 }
 
 .hidden {
@@ -36,7 +37,7 @@ body{
     color: #CBE4DE;
 }
 
-.search-container{
+.search-container {
     align-self: center;
     /* display: flex; */
     /* justify-content: space-between; */
@@ -56,24 +57,24 @@ body{
 }
 
 .search-container button,
-#search-bar:hover{
+#search-bar:hover {
     padding: 1.04em;
     border: none;
     border-radius: 5px;
-    background-color:#CBE4DE;
+    background-color: #CBE4DE;
     color: #2C3333;
 }
 
-.search-container button{
+.search-container button {
     width: 20%;
     padding: 1.04em 0;
 }
 
-.search-container button:hover{
-    transform:scale(1.1);
+.search-container button:hover {
+    transform: scale(1.1);
 }
 
-.inner-wrapper{
+.inner-wrapper {
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
     display: flex;
@@ -81,7 +82,7 @@ body{
     cursor: pointer;
 }
 
-.inner-wrapper img{
+.inner-wrapper img {
     height: 1.5rem;
     margin-right: 1rem;
 }
@@ -92,7 +93,7 @@ nav {
     height: 100vh;
     left: 0;
     top: 0;
-    width: 70%;
+    width: 40%;
     visibility: hidden;
     transform: translateX(-50%);
     opacity: 0;
@@ -100,9 +101,10 @@ nav {
     text-align: left;
     color: #CBE4DE;
     padding-left: 2rem;
+    z-index: 1;
 }
 
-li{
+li {
     list-style: none;
     margin-left: -40px;
     line-height: 3.3rem;
@@ -116,15 +118,18 @@ a {
 }
 
 header {
- background-color: #2C3333;
- height: 15vh;
- text-align: center;
- display: flex;
- flex-direction: column;
- justify-content: space-around;
+    background-color: #2C3333;
+    height: 18vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* position: relative;
+    z-index: 10; */
+    /* box-shadow: 0px 8px 7.4564px #2C3333; */
 }
 
-header .top{
+header .top {
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -145,13 +150,14 @@ header h3 {
     transform: translateX(0);
 }
 
-.carousel{
+.carousel {
     display: flex;
+    /* justify-content: flex-start; */
     /* height: 30vh; */
     text-align: center;
     margin-bottom: 1rem;
     color: #CBE4DE;
-    position: relative; 
+    position: relative;
 }
 
 .carousel-actions {
@@ -177,12 +183,12 @@ header h3 {
     background-color: transparent;
 }
 
-.none{
+.none {
     /* Should be placed after .corousel selector's rules so "display: flex;" will not affect it */
     display: none;
 }
 
-.carousel-actions button:hover{
+.carousel-actions button:hover {
     transform: scale(1.2);
 }
 
@@ -191,7 +197,7 @@ header h3 {
 }
 
 .carousel .carousel-actions button#carousel-button-next {
-    margin-right: 4%;   
+    margin-right: 4%;
 }
 
 .carousel .carousel-item,
@@ -208,19 +214,21 @@ header h3 {
     0% {
         opacity: 0;
     }
-    
+
     100% {
         opacity: 1;
     }
 }
 
-/* @media (min-width: 600px){
-   
-} */
+@media (min-width: 500px){
+   #carousel-buttons {
+       display: none;
+   }
+}
 
-.img-quote{
+.img-quote {
     background-color: #2E4F4F;
-    background-blend-mode: multiply; 
+    background-blend-mode: multiply;
     background-size: cover;
     font-size: 0.9rem;
     padding: 0.5em 1.5em;
@@ -230,40 +238,39 @@ header h3 {
     justify-content: center; */
 }
 
-.img-quote p{
-    /* margin: 0.7em; */
+.img-quote p {
     width: 100%;
 }
 
-.img-quote img{
+.img-quote img {
     width: 2em;
 }
 
-.img-quote-1{
+.img-quote-1 {
     background-image: url("images/plant-1.jpeg");
 }
 
-.img-quote-2{
+.img-quote-2 {
     background-image: url("images/plant-center.jpeg");
 }
 
-.img-quote-3{
+.img-quote-3 {
     background-image: url("images/plant-2.jpeg");
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-h2{
+h2 {
     color: #2E4F4F;
     /* margin-top: 0; */
 }
 
-#quote-block{
+#quote-block {
     background-color: #0E8388;
     color: #CBE4DE;
     text-align: center;
@@ -274,11 +281,11 @@ h2{
     padding: 1rem 2rem;
 }
 
-.quote{
+.quote {
     font-style: italic;
 }
 
-.btn{
+.btn {
     padding: 0.7rem 1.2rem;
     font-size: 1rem;
     /* border-radius: 18px; */
@@ -286,14 +293,14 @@ h2{
 
 /* POPULAR TOPICS */
 
-.flex-container{
+.flex-container {
     width: 90%;
     display: flex;
     flex-wrap: wrap;
     margin-right: -0.5em;
 }
 
-.flex-card{
+.flex-card {
     padding: 0.2rem 2rem;
     flex: 1 0 30%;
     margin-top: 0.3em;
@@ -303,12 +310,12 @@ h2{
 }
 
 .btn,
-.flex-card{
+.flex-card {
     border: none;
     color: #CBE4DE;
     font-weight: bold;
     text-shadow: 2px 2px #2C3333;
-    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
     background-color: #2E4F4F;
     opacity: 0.5;
     border-radius: 5px;
@@ -319,12 +326,12 @@ h2{
 #get-quote-btn:focus, */
 .btn:hover,
 .btn:active,
-.flex-card:hover{
+.flex-card:hover {
     transform: translateY(-2px);
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #2C3333 0 -3px 0 inset;
 }
 
-.btn:disabled{
+.btn:disabled {
     pointer-events: none;
     filter: grayscale(100%);
     opacity: 0.15;
@@ -332,7 +339,6 @@ h2{
 
 .disabled {
     pointer-events: none;
-    opacity: 1;
 }
 
 .quote-card {
@@ -341,3 +347,4 @@ h2{
     flex-direction: column;
     align-items: center;
 }
+

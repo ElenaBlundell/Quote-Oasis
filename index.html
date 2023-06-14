@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,71 +9,76 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,400&display=swap"
+        rel="stylesheet">
     <title>My Quote of the Day</title>
-    <!-- Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a> -->
-    </head>
+</head>
+
 <body>
     <nav id="nav">
         <div id="exit-btn" class="inner-wrapper">
-            <img  src="images/left-arrow.png" alt="go back icon">
-                <p>Go back</p>
+            <img src="images/left-arrow.png" alt="go back icon">
+            <p>Go back</p>
         </div>
-       
-         <ul clas="nav-list">
+
+        <ul clas="nav-list">
             <li class="nav-li-item selected"><a class="nav-link" href="index.html">Home</a></li>
             <li class="nav-list-item"><a class="nav-link" href="popular_topics.html">Popular topics</a></li>
-            <li class="nav-li-item"><a class="nav-link" href="favorite_authors.html">Favorite Authors</a></li>
             <li class="nav-list-item"><a class="nav-link" href="all_topics.html">All topics</a></li>
+            <li class="nav-li-item"><a class="nav-link" href="favorite_authors.html">Favorite Authors</a></li>
         </ul>
     </nav>
 
-        <header>
-            <div class="top">
-                <i id="menu-btn" class="fa-solid fa-bars fa-lg" style="color: #cbe4de;"></i>
-                <h1 class="logo">My <span>Quote</span> of the <span>Day</span></h1>
-                <i id="search-icon" class="fa fa-search fa-lg" aria-hidden="true"></i>
-            </div>
-
-            <div class="search-container none" id="search-container">
-                <form id="search-form">
-                    <input type="search" id="search-bar" name="q" placeholder="Search for a specific topic or phrase" required>
-                    <button type="submit" id="search-btn" >Search</button>
-                </form>
-            </div>
-    
-    </header>
-    
-        <div id="carousel" class="carousel">
-            <div class="carousel-item carousel-item-visible img-quote img-quote-1">
-                <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.</p>
-                <div class="author">
-                    <img src="images/palm.png">
-                    <p>Maya Angelou</p>
-                </div>
-            </div>
-            <div class="carousel-item img-quote img-quote-2 none" id="img-quote-2">
-                <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.</p>
-                <div class="author">
-                    <img src="images/palm.png">
-                    <p>Maya Angelou</p>
-                </div>
-            </div>
-            <div class="carousel-item img-quote img-quote-3 none" id="img-quote-3">
-                <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.</p>
-                <div class="author">
-                    <img src="images/palm.png">
-                    <p>Maya Angelou</p>
-                </div>
-            </div>
-            <div id="carousel-buttons" class="carousel-actions">
-                <button id="carousel-button-prev" aria-label="Previous Slidex"><</button>
-                <button id="carousel-button-next" aria-label="Next Slide">></button>
-            </div>
+    <header>
+        <div class="top">
+            <i id="menu-btn" class="fa-solid fa-bars fa-lg" style="color: #cbe4de;"></i>
+            <h1 class="logo">My <span>Quote</span> of the <span>Day</span></h1>
+            <i id="search-icon" class="fa fa-search fa-lg" aria-hidden="true"></i>
         </div>
+
+        <div class="search-container none" id="search-container">
+            <form id="search-form">
+                <input type="search" id="search-bar" name="q" placeholder="Search for a specific topic or phrase"
+                    required>
+                <button type="submit" id="search-btn">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <div id="carousel" class="carousel">
+        <div class="carousel-item carousel-item-visible img-quote img-quote-1">
+            <!-- <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion,
+                some compassion, some humor, and some style.</p>
+            <div class="author">
+                <img src="images/palm.png">
+                <p>Maya Angelou</p>
+            </div> -->
+        </div>
+        <div class="carousel-item img-quote img-quote-2 none" id="img-quote-2">
+            <!-- <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion,
+                some compassion, some humor, and some style.</p>
+            <div class="author">
+                <img src="images/palm.png">
+                <p>Maya Angelou</p>
+            </div> -->
+        </div>
+        <div class="carousel-item img-quote img-quote-3 none" id="img-quote-3">
+            <!-- <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion,
+                some compassion, some humor, and some style.</p>
+            <div class="author">
+                <img src="images/palm.png">
+                <p>Maya Angelou</p>
+            </div> -->
+        </div>
+        <div id="carousel-buttons" class="carousel-actions">
+            <button id="carousel-button-prev" aria-label="Previous Slidex"><</button> 
+            <button id="carousel-button-next" aria-label="Next Slide">></button>
+        </div>
+    </div>
     <main id="main">
         <div class="topic-name">
-            <h2 id="topic-name" class="hidden">Quotes about </h2>
+            <h2 id="topic-name" class="hidden"></h2>
         </div>
         <div id="quote-block">
             <p class="quote">Find what inspires YOU</p>
@@ -87,4 +93,5 @@
     </main>
     <script src="index.js" type="module"></script>
 </body>
+
 </html>

@@ -1,3 +1,5 @@
+import {baseUrl} from './data.js'
+
 const get = element => document.getElementById(element);
 
 const open = get("menu-btn")
@@ -45,7 +47,7 @@ searchIcon.addEventListener("click", () => {
     searchContainer.classList.remove("none")
     nav.classList.remove('open-nav')
     carousel.style.position = "relative"
-} )
+})
 
 const slides = document.getElementsByClassName('carousel-item');
 let slidePosition = 0;
@@ -64,19 +66,19 @@ function hideAllSlides() {
 
 function moveToNextSlide() {
     hideAllSlides();
-    
+
     if (slidePosition === totalSlides - 1) {
         slidePosition = 0;
     } else {
         slidePosition++;
     }
-    
+
     slides[slidePosition].classList.add("carousel-item-visible");
 }
 
 function moveToPrevSlide() {
     hideAllSlides();
-    
+
     if (slidePosition === 0) {
         slidePosition = totalSlides - 1;
     } else {
@@ -91,22 +93,24 @@ import {popularTopicsArr} from './data.js'
 
 const popularTopics = get("popular-topics")
 
-function makeTopicsGrid(){
+makeTopicsGrid()
+
+function makeTopicsGrid() {
     popularTopicsArr.forEach(topic => {
-        console.log(topic)
+        // console.log(topic)
         popularTopics.innerHTML += `<div class="flex-card">
             <p>${topic}</p>
         </div>`
     })
 }
 
-function topicQuoteHtml(data){
-    
+function topicQuoteHtml(data) {
+
     popularTopics.innerHTML = `<div id="quote-block">
-        <p class="quote" id="quote">"${data.q}"</p>
+        <p class="quote" id="quote">"${data.content}"</p>
         <div class="author">
             <img src="images/palm.png">
-        <p id="author">${data.a}</p>
+            <p id="author">${data.author}</p>
         </div>
     </div>
     <div class="btn-block">
@@ -119,40 +123,66 @@ function topicQuoteHtml(data){
     getNextQuote()
 }
 
-makeTopicsGrid()
+
 
 let topicQuotesArr = []
+const topicName = get("topic-name")
 
-function getTopicQuotes(){
+function getTopicQuotes() {
     const flexCardsArr = Array.from(flexCardsCollection)
     flexCardsArr.forEach(card => {
         card.addEventListener("click", () => {
-            fetch(`https://zenquotes.io/api/quotes/keyword=${popularTopicsArr[flexCardsArr.indexOf(card)]}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(popularTopicsArr[flexCardsArr.indexOf(card)])
-                topicQuotesArr = data
-                console.log(topicQuotesArr)
-                topicQuoteHtml(topicQuotesArr[0])
-            })
+            let cardName = popularTopicsArr[flexCardsArr.indexOf(card)]
+
+            fetch(`${baseUrl}/quotes?tags=${cardName}&limit=150`)
+                .then(response => response.json())
+                .then(data => {
+                    topicQuotesArr = data.results
+                    topicQuoteHtml(topicQuotesArr[0])
+                })
+                
+                if (cardName.endsWith("al")) {
+                    cardName = cardName.substring(0, cardName.length - 2)
+                }
+                topicName.textContent += cardName.toLowerCase()
+                topicName.classList.remove("hidden")
         })
     })
 }
 
 getTopicQuotes()
 
-function getNextQuote(){
+const backPopularTopics = get("get-popular-topics")
+
+backPopularTopics?.addEventListener("click", function () {
+    topicName.classList.add("hidden")
+})
+
+
+
+function getNextQuote() {
     const getPtQuote = get("get-pt-quote")
     const quote = get("quote")
     const author = get("author")
+
+    let nextQuote = topicQuotesArr.shift()
+    let nextQuoteIndex = 0
+
     getPtQuote.addEventListener("click", () => {
-        let nextQuote = topicQuotesArr.shift()
-        if (nextQuote) {
+        
+        if (nextQuoteIndex === 0) {
             nextQuote = topicQuotesArr.shift()
-            quote.innerHTML = `"${nextQuote.q}"`
-            author.innerHTML = `${nextQuote.a}`
-        }else{
+        }
+
+        quote.innerHTML = `"${nextQuote.content}"`
+        author.innerHTML = `${nextQuote.author}`
+
+        nextQuote = topicQuotesArr.shift()
+        if (!nextQuote) {
             getPtQuote.disabled = true
-        } 
+        }
+        nextQuoteIndex++
     })
+
+    
 }

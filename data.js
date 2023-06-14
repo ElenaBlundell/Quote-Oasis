@@ -1,16 +1,18 @@
 const baseUrl = "https://api.quotable.io"
 
-const popularTopicsArr = ["Inspiration", "Love", "Happiness", "Success",
-                       "Courage", "Confidence", "Leadership", "Change"]
+const popularTopicsArr = ["Inspirational", "Love", "Happiness", "Success",
+                       "Wisdom", "Friendship", "Motivational", "Change"]
 
-const allTopicsArr = ["Anxiety", "Change", "Choice", "Confidence", "Courage",
-                    "Death", "Dreams", "Excellence", "Failure", "Fairness", "Fear",
-                    "Forgiveness", "Freedom", "Future", "Happiness", "Inspiration",
-                    "Kindness", "Leadership", "Life", "Living", "Love", "Pain", "Past",
-                    "Success", "Time", "Today", "Truth", "Work"]
+let allTopicsArr = ["Sports", "Change", "History", "Friendship", "Wisdom",
+                    "Philosophy", "Humorous", "Creativity", "Failure", "Imagination", "Competition",
+                    "Virtue", "Freedom", "Future", "Happiness", "Inspirational",
+                    "Honor", "Motivational", "Life", "Science", "Love", "Pain", "Gratitude",
+                    "Success", "Time", "Technology", "Truth", "Work", "Social Justice", "Famous Quotes"]
+allTopicsArr = allTopicsArr.sort()
 
-const favoriteAuthorsArr = ["Confucius", "Albert Einstein", "Mark Twain",
-                         "Saint Patrick", "Abraham Lincoln", "Maya Angelou", "Anne Frank",
-                        "Oscar Wilde", "Theodore Roosevelt"]
+let favoriteAuthorsArr = ["Dalai Lama", "Albert Einstein", "Theodore Roosevelt",
+                         "Ernest Hemingway", "Abraham Lincoln", "Maya Angelou", "Henry Ford",
+                        "Oscar Wilde", "Dr. Seuss"]
+favoriteAuthorsArr = favoriteAuthorsArr.sort()
 
 export {baseUrl, popularTopicsArr, allTopicsArr, favoriteAuthorsArr}

@@ -46,7 +46,7 @@ searchIcon.addEventListener("click", () => {
     searchContainer.classList.remove("none")
     nav.classList.remove('open-nav')
     carousel.style.position = "relative"
-} )
+})
 
 const slides = document.getElementsByClassName('carousel-item');
 let slidePosition = 0;
@@ -65,19 +65,19 @@ function hideAllSlides() {
 
 function moveToNextSlide() {
     hideAllSlides();
-    
+
     if (slidePosition === totalSlides - 1) {
         slidePosition = 0;
     } else {
         slidePosition++;
     }
-    
+
     slides[slidePosition].classList.add("carousel-item-visible");
 }
 
 function moveToPrevSlide() {
     hideAllSlides();
-    
+
     if (slidePosition === 0) {
         slidePosition = totalSlides - 1;
     } else {
@@ -88,11 +88,13 @@ function moveToPrevSlide() {
 }
 
 // Favorite Authors
-import {favoriteAuthorsArr} from './data.js'
+import {
+    favoriteAuthorsArr
+} from './data.js'
 
 const favoriteAuthors = get("favorite-authors")
 
-function makeTopicsGrid(){
+function makeTopicsGrid() {
     favoriteAuthorsArr.forEach(author => {
         favoriteAuthors.innerHTML += `<div class="flex-card">
             <p>${author}</p>
@@ -100,8 +102,8 @@ function makeTopicsGrid(){
     })
 }
 
-function authorQuoteHtml(data){
-    
+function authorQuoteHtml(data) {
+
     favoriteAuthors.innerHTML = `<div id="quote-block">
         <p class="quote" id="quote">"${data.content}"</p>
         <div class="author">
@@ -123,24 +125,23 @@ makeTopicsGrid()
 
 let authorQuotesArr = []
 
-function getAuthorQuotes(){
+function getAuthorQuotes() {
     const flexCardsArr = Array.from(flexCardsCollection)
     flexCardsArr.forEach(card => {
         card.addEventListener("click", () => {
-            // fetch(`https://zenquotes.io/api/quotes/keyword=${favoriteAuthorsArr[flexCardsArr.indexOf(card)]}`)
             fetch(`https://api.quotable.io/quotes?author=${favoriteAuthorsArr[flexCardsArr.indexOf(card)]}`)
                 .then(response => response.json())
                 .then(data => {
                     authorQuotesArr = data.results
                     authorQuoteHtml(authorQuotesArr[0])
-            })
+                })
         })
     })
 }
 
 getAuthorQuotes()
 
-function getNextQuote(){
+function getNextQuote() {
     const getAuthorQuote = get("get-author-quote")
     const quote = get("quote")
     const author = get("author")
@@ -150,8 +151,8 @@ function getNextQuote(){
             nextQuote = authorQuotesArr.shift()
             quote.innerHTML = `"${nextQuote.content}"`
             author.innerHTML = `${nextQuote.author}`
-        }else{
+        } else {
             getAuthorQuote.disabled = true
-        } 
+        }
     })
 }
