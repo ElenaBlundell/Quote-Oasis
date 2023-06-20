@@ -1,4 +1,5 @@
 import {
+    allTopicsArr,
     baseUrl
 } from './data.js'
 
@@ -49,7 +50,7 @@ let authorsList = []
 let authorsSearchResult = []
 let quotesList = []
 
-
+// Recursive function, that querying page after page until all pages data is stored in authorsList
 function getAuthorsList(pageNum = 1) {
     fetch(`${baseUrl}/authors?sortBy=name&page=${pageNum}`)
         .then(response => response.json())
@@ -73,7 +74,6 @@ searchForm.addEventListener("submit", function (e) {
 })
 
 searchBtn.addEventListener("click", function () {
-    // console.log("button's clicked!")
     authorsList.forEach(author => {
         if (author.includes(searchBar.value)) {
             authorsSearchResult.push(author)
@@ -83,13 +83,28 @@ searchBtn.addEventListener("click", function () {
     return (authorsSearchResult.length === 0) ? searchQuote() : authorsListHtml()
 })
 
-function authorsListHtml() {
-    authorsSearchResult.forEach(author => {
-        console.log("authorsListHtml got triggered")
-        main.innerHTML = `<p style="color: red">YOU did it!</p>
-        `
-    })
-}
+// function authorsListHtml() {
+//     authorsSearchResult.forEach(author => {
+//         // console.log("authorsListHtml got triggered")
+//         main.innerHTML += `<div class="flex-card">
+//                                 <p>${author}</p>
+//                            </div>`
+//     })
+// }
+
+// function getAuthorQuotes() {
+//     const flexCardsArr = Array.from(flexCardsCollection)
+//     flexCardsArr.forEach(card => {
+//         card.addEventListener("click", () => {
+//             fetch(`https://api.quotable.io/quotes?author=${favoriteAuthorsArr[flexCardsArr.indexOf(card)]}`)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     authorQuotesArr = data.results
+//                     authorQuoteHtml(authorQuotesArr[0])
+//                 })
+//         })
+//     })
+// }
 
 async function searchQuote() {
     quotesList = []
@@ -108,13 +123,13 @@ async function searchQuote() {
 const topicName = get("topic-name")
 
 function getQuotesListHtml() {
-
-    topicName.textContent = `Quotes about ${searchBar.value.toLowerCase()}`
-    topicName.classList.remove("hidden")
-
+    // need to change allTopicsArr to lowerCase to compare
+    if (allTopicsArr.includes (`${searchBar.value}`)) {
+        topicName.textContent = `Quotes about ${searchBar.value.toLowerCase()}`
+        topicName.classList.remove("hidden")
+    }
     console.log(quotesList)
     console.log(quotesList[0].quote)
-    // console.log(JSON.parse(JSON.stringify(quotesList[0])))
 
     quoteBlock.innerHTML = `<p class="quote">"${quotesList[0].quote}"</p>
         <div class="author">
