@@ -8,7 +8,7 @@ const searchBar = get("search-bar")
 const searchIcon = get("search-icon")
 const searchContainer = get("search-container")
 
-const carousel = get("carousel")
+// const carousel = get("carousel")
 
 
 let flexCardsCollection = document.getElementsByClassName("flex-card")
@@ -48,44 +48,44 @@ searchIcon.addEventListener("click", () => {
     carousel.style.position = "relative"
 })
 
-const slides = document.getElementsByClassName('carousel-item');
-let slidePosition = 0;
-const totalSlides = slides.length;
-const carouselButtons = get("carousel-buttons")
+// const slides = document.getElementsByClassName('carousel-item');
+// let slidePosition = 0;
+// const totalSlides = slides.length;
+// const carouselButtons = get("carousel-buttons")
 
-document.getElementById('carousel-button-next').addEventListener('click', moveToNextSlide);
-document.getElementById('carousel-button-prev').addEventListener('click', moveToPrevSlide);
+// document.getElementById('carousel-button-next').addEventListener('click', moveToNextSlide);
+// document.getElementById('carousel-button-prev').addEventListener('click', moveToPrevSlide);
 
-function hideAllSlides() {
-    for (let slide of slides) {
-        slide.classList.remove('carousel-item-visible');
-        slide.classList.add('carousel-item-hidden');
-    }
-}
+// function hideAllSlides() {
+//     for (let slide of slides) {
+//         slide.classList.remove('carousel-item-visible');
+//         slide.classList.add('carousel-item-hidden');
+//     }
+// }
 
-function moveToNextSlide() {
-    hideAllSlides();
+// function moveToNextSlide() {
+//     hideAllSlides();
 
-    if (slidePosition === totalSlides - 1) {
-        slidePosition = 0;
-    } else {
-        slidePosition++;
-    }
+//     if (slidePosition === totalSlides - 1) {
+//         slidePosition = 0;
+//     } else {
+//         slidePosition++;
+//     }
 
-    slides[slidePosition].classList.add("carousel-item-visible");
-}
+//     slides[slidePosition].classList.add("carousel-item-visible");
+// }
 
-function moveToPrevSlide() {
-    hideAllSlides();
+// function moveToPrevSlide() {
+//     hideAllSlides();
 
-    if (slidePosition === 0) {
-        slidePosition = totalSlides - 1;
-    } else {
-        slidePosition--;
-    }
+//     if (slidePosition === 0) {
+//         slidePosition = totalSlides - 1;
+//     } else {
+//         slidePosition--;
+//     }
 
-    slides[slidePosition].classList.add("carousel-item-visible");
-}
+//     slides[slidePosition].classList.add("carousel-item-visible");
+// }
 
 // Favorite Authors
 import {
@@ -113,12 +113,12 @@ function authorQuoteHtml(data) {
     </div>
     <div class="btn-block">
         <a id="back-favorite-authors" href="favorite_authors.html" class="btn">Go back</a>
-        <button id="get-author-quote" class="btn">Get a quote</button>
+        <button id="next-quote-btn" class="btn">Next quote</button>
     </div>    
     `
     favoriteAuthors.classList.remove("flex-container")
     favoriteAuthors.classList.add("quote-card")
-    getNextQuote()
+    getNextQuote(authorQuotesArr)
 }
 
 makeTopicsGrid()
@@ -141,18 +141,27 @@ function getAuthorQuotes() {
 
 getAuthorQuotes()
 
-function getNextQuote() {
-    const getAuthorQuote = get("get-author-quote")
+function getNextQuote(data) {
+    const nextQuoteBtn = get("next-quote-btn")
     const quote = get("quote")
     const author = get("author")
-    getAuthorQuote.addEventListener("click", () => {
-        let nextQuote = authorQuotesArr.shift()
-        if (nextQuote) {
-            nextQuote = authorQuotesArr.shift()
-            quote.innerHTML = `"${nextQuote.content}"`
-            author.innerHTML = `${nextQuote.author}`
-        } else {
-            getAuthorQuote.disabled = true
+
+    let nextQuote = data.shift()
+    let nextQuoteIndex = 0
+    
+    nextQuoteBtn.addEventListener("click", () => {
+
+        if (nextQuoteIndex === 0) {
+            nextQuote = data.shift()
         }
+
+        quote.innerHTML = `"${nextQuote.content}"`
+        author.innerHTML = `${nextQuote.author}`
+
+        nextQuote = data.shift()
+        if (!nextQuote) {
+            nextQuoteBtn.disabled = true
+        }
+        nextQuoteIndex++
     })
 }

@@ -6,17 +6,14 @@ import {
 const get = element => document.getElementById(element);
 
 // Access main page elements
-
 const main = get("main")
-
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
-const addBtn = get("add-btn")
+// const addBtn = get("add-btn")
 const btnBlockHome = get("btn-block-home")
 
 
 // HEADER
-
 const searchIcon = get("search-icon")
 
 searchIcon.addEventListener("click", () => {
@@ -57,6 +54,7 @@ let quotesList = []
 getAuthorsList()
 
 // Recursive function, that querying page after page until all pages data is stored in authorsList
+
 function getAuthorsList(pageNum = 1) {
     fetch(`${baseUrl}/authors?sortBy=name&page=${pageNum}`)
         .then(response => response.json())
@@ -78,6 +76,7 @@ searchForm.addEventListener("submit", function (e) {
 })
 
 // Step 1. Check if the search bar value is an existing author's name 
+
 searchBtn.addEventListener("click", function () {
     authorsSearchResult = []
     authorsList.forEach(author => {
@@ -90,6 +89,7 @@ searchBtn.addEventListener("click", function () {
 })
 
 // Step 2.QUOTES. Store all quotes for a requested topic in an array
+
 async function searchQuote() {
     quotesList = []
     const res = await fetch(`${baseUrl}/search/quotes?query=${searchBar.value}&limit=150`)
@@ -107,6 +107,7 @@ async function searchQuote() {
 const topicName = get("topic-name")
 
 // Step 3.QUOTES. Display a quote for a surched topic
+
 function getQuoteCardHtml() {
     let lowerCaseTopicsArr = allTopicsArr.map(topic => topic.toLowerCase())
     if (lowerCaseTopicsArr.includes(searchBar.value)) {
@@ -131,7 +132,9 @@ function getQuoteCardHtml() {
 }
 
 // Step 2.AUTHORS. Display a list of options for a surched author
+
 let authorsCardsList
+
 function authorsListHtml() {
     main.innerHTML = `<div id="authors-list" class="flex-container"></div>`
     authorsCardsList = get("authors-list")
@@ -142,7 +145,9 @@ function authorsListHtml() {
     })
     getAuthorQuotes()
 }
+
 // Step 3.AUTHORS. Get a quote from a chosen(clicked) author
+
 let authorQuotesArr = []
 
 function getAuthorQuotes() {
@@ -185,7 +190,7 @@ function authorQuoteHtml(data) {
     } 
 }
 
-// Display next quote for a chosen author/topic
+// Display next quote for a chosen author/topic after a click on a "Next quote" button
 
 function getNextQuote(data) {
     const nextQuoteBtn = get("next-quote-btn")
@@ -297,8 +302,15 @@ function getSlideQuoteHtml(data){
 // }
 
 
+// GET A RANDOM QUOTE
 
-// GET A QUOTE
+quoteBtn.addEventListener("click", () => {
+    fetch(`${baseUrl}/random`)
+        .then(response => response.json())
+        .then(data => {
+            quoteBlock.innerHTML = getQuoteHtml(data)
+        })
+})
 
 function getQuoteHtml(data) {
     // let authorImg = getAuthorImg(data)
@@ -309,15 +321,6 @@ function getQuoteHtml(data) {
             <p>${data.author}</p>
             </div>`
 }
-
-quoteBtn.addEventListener("click", () => {
-    fetch(`${baseUrl}/random`)
-        .then(response => response.json())
-        .then(data => {
-            // console.log(data)
-            quoteBlock.innerHTML = getQuoteHtml(data)
-        })
-})
 
 // RESPONSIVE DESIGN
 
