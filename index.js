@@ -12,6 +12,8 @@ const main = get("main")
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
 const addBtn = get("add-btn")
+const btnBlockHome = get("btn-block-home")
+
 
 // HEADER
 
@@ -50,6 +52,10 @@ let authorsList = []
 let authorsSearchResult = []
 let quotesList = []
 
+
+// Getting a list of authors that stored in data base
+getAuthorsList()
+
 // Recursive function, that querying page after page until all pages data is stored in authorsList
 function getAuthorsList(pageNum = 1) {
     fetch(`${baseUrl}/authors?sortBy=name&page=${pageNum}`)
@@ -62,18 +68,18 @@ function getAuthorsList(pageNum = 1) {
                 return getAuthorsList(pageNum)
             }
         })
-        
-    console.log("getAuthorsList triggered")
     console.log(authorsList)
 }
 
-getAuthorsList()
+
 
 searchForm.addEventListener("submit", function (e) {
     e.preventDefault()
 })
 
+// Step 1. Check if the search bar value is an existing author's name 
 searchBtn.addEventListener("click", function () {
+    authorsSearchResult = []
     authorsList.forEach(author => {
         if (author.includes(searchBar.value)) {
             authorsSearchResult.push(author)
@@ -83,68 +89,135 @@ searchBtn.addEventListener("click", function () {
     return (authorsSearchResult.length === 0) ? searchQuote() : authorsListHtml()
 })
 
-// function authorsListHtml() {
-//     authorsSearchResult.forEach(author => {
-//         // console.log("authorsListHtml got triggered")
-//         main.innerHTML += `<div class="flex-card">
-//                                 <p>${author}</p>
-//                            </div>`
-//     })
-// }
-
-// function getAuthorQuotes() {
-//     const flexCardsArr = Array.from(flexCardsCollection)
-//     flexCardsArr.forEach(card => {
-//         card.addEventListener("click", () => {
-//             fetch(`https://api.quotable.io/quotes?author=${favoriteAuthorsArr[flexCardsArr.indexOf(card)]}`)
-//                 .then(response => response.json())
-//                 .then(data => {
-//                     authorQuotesArr = data.results
-//                     authorQuoteHtml(authorQuotesArr[0])
-//                 })
-//         })
-//     })
-// }
-
+// Step 2.QUOTES. Store all quotes for a requested topic in an array
 async function searchQuote() {
     quotesList = []
     const res = await fetch(`${baseUrl}/search/quotes?query=${searchBar.value}&limit=150`)
     const data = await res.json()
     data.results.forEach(result => quotesList.push({
-        "quote": result.content,
+        "content": result.content,
         "author": result.author
         }))
 
     return (quotesList.length !== 0) 
-            ? getQuotesListHtml()
-            : alert(`No quotes about ${searchBar.value.toLowerCase()} were found`) 
+            ? getQuoteCardHtml()
+            : alert(`No quotes for your request were found`) 
 }
 
 const topicName = get("topic-name")
 
-function getQuotesListHtml() {
-    // need to change allTopicsArr to lowerCase to compare
-    if (allTopicsArr.includes (`${searchBar.value}`)) {
+// Step 3.QUOTES. Display a quote for a surched topic
+function getQuoteCardHtml() {
+    let lowerCaseTopicsArr = allTopicsArr.map(topic => topic.toLowerCase())
+    if (lowerCaseTopicsArr.includes(searchBar.value)) {
         topicName.textContent = `Quotes about ${searchBar.value.toLowerCase()}`
         topicName.classList.remove("hidden")
     }
-    console.log(quotesList)
-    console.log(quotesList[0].quote)
 
-    quoteBlock.innerHTML = `<p class="quote">"${quotesList[0].quote}"</p>
+    quoteBlock.innerHTML = `<p id="quote" class="quote">"${quotesList[0].content}"</p>
         <div class="author">
             <img src="images/palm.png">
-        <p>${quotesList[0].author}</p>
+        <p id="author">${quotesList[0].author}</p>
         </div>
         `
+    if(quotesList.length > 1){
+            btnBlockHome.innerHTML = `
+            <a href="index.html" class="btn">Go back</a>
+            <button id="next-quote-btn" class="btn">Next quote</button>
+            `
+            getNextQuote(quotesList)
+        } 
+    // btnBlock = `<button id="next-quote" class="btn">Next quote</button>`
+}
+
+// Step 2.AUTHORS. Display a list of options for a surched author
+let authorsCardsList
+function authorsListHtml() {
+    main.innerHTML = `<div id="authors-list" class="flex-container"></div>`
+    authorsCardsList = get("authors-list")
+    authorsSearchResult.forEach(author => {
+        authorsCardsList.innerHTML += `<div class="flex-card">
+                                            <p>${author}</p>
+                                       </div>`
+    })
+    getAuthorQuotes()
+}
+// Step 3.AUTHORS. Get a quote from a chosen(clicked) author
+let authorQuotesArr = []
+
+function getAuthorQuotes() {
+    let authorsCardsCollection = document.getElementsByClassName("flex-card")
+    const authorsCardsArr = Array.from(authorsCardsCollection)
+    authorsCardsArr.forEach(card => {
+        card.addEventListener("click", () => {
+            fetch(`https://api.quotable.io/quotes?author=${authorsSearchResult[authorsCardsArr.indexOf(card)]}`)
+                .then(response => response.json())
+                .then(data => {
+                    authorQuotesArr = data.results
+                    authorQuoteHtml(authorQuotesArr[0])
+                })
+        })
+    })
+}
+
+// Step 4.AUTHORS. Display a quote from a chosen(clicked) author
+function authorQuoteHtml(data) {
+
+    authorsCardsList.innerHTML = `<div id="quote-block">
+        <p class="quote" id="quote">"${data.content}"</p>
+        <div class="author">
+            <img src="images/palm.png">
+        <p id="author">${data.author}</p>
+        </div>
+    </div>
+    <div id="btn-block" class="btn-block">
+         <a href="index.html" class="btn">Go back</a>
+        
+    </div>    
+    `
+    authorsCardsList.classList.remove("flex-container")
+    authorsCardsList.classList.add("quote-card")
+
+    if(authorQuotesArr.length > 1){
+        const btnBlock = get("btn-block")
+        btnBlock.innerHTML += `<button id="next-quote-btn" class="btn">Next quote</button>`
+        getNextQuote(authorQuotesArr)
+    } 
+}
+
+// Display next quote for a chosen author/topic
+
+function getNextQuote(data) {
+    const nextQuoteBtn = get("next-quote-btn")
+    const quote = get("quote")
+    const author = get("author")
+
+    let nextQuote = data.shift()
+    let nextQuoteIndex = 0
+    
+    nextQuoteBtn.addEventListener("click", () => {
+
+        if (nextQuoteIndex === 0) {
+            nextQuote = data.shift()
+        }
+
+        quote.innerHTML = `"${nextQuote.content}"`
+        author.innerHTML = `${nextQuote.author}`
+
+        nextQuote = data.shift()
+        if (!nextQuote) {
+            nextQuoteBtn.disabled = true
+        }
+        nextQuoteIndex++
+    })
 }
 
 // CAROUSEL OF SLIDES
-const carousel = get("carousel")
 
-const slides = document.getElementsByClassName('carousel-item');
-let slidePosition = 0;
-const totalSlides = slides.length;
+const carousel = get("carousel")
+const slides = document.getElementsByClassName('carousel-item')
+let slidePosition = 0
+const totalSlides = slides.length
 const carouselButtons = get("carousel-buttons")
 const imgQuote2 = get("img-quote-2")
 const imgQuote3 = get("img-quote-3")
