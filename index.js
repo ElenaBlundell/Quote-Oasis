@@ -79,9 +79,11 @@ searchForm.addEventListener("submit", function (e) {
 
 searchBtn.addEventListener("click", function () {
     authorsSearchResult = []
-    authorsList.forEach(author => {
-        if (author.includes(searchBar.value)) {
-            authorsSearchResult.push(author)
+    let lowerCaseAuthorsList = authorsList.map(author => author.toLowerCase())
+    lowerCaseAuthorsList.forEach(author => {
+
+        if (author.includes(searchBar.value.toLowerCase())) {
+            authorsSearchResult.push(authorsList[lowerCaseAuthorsList.indexOf(author)])
         }
     })
     console.log(authorsList)
@@ -323,6 +325,7 @@ function getQuoteHtml(data) {
 }
 
 // RESPONSIVE DESIGN
+const navList = get("nav-list")
 
 const mediaQuerySmall = window.matchMedia("(max-width: 499px)")
 const mediaQueryMedium = window.matchMedia("(min-width: 500px)")
@@ -338,22 +341,24 @@ function handleScreenChangeSmall(e) {
 
 function handleScreenChangeMedium(e) {
     if (e.matches) {
-        // console.log("Media Query Matched!")
+        console.log("Media Query Matched Medium!")
         imgQuote2.classList.add("carousel-item-visible")
+        
     }
 }
 
 function handleScreenChangeMediumL(e) {
     if (e.matches) {
-        // console.log("it is mL now")
+        console.log("it is mL now")
         imgQuote3.classList.remove("carousel-item-visible")
         carouselButtons.style.visibility = "visible"
+        navList.style.fontSize = "10px"
     }
 }
 
 function handleScreenChangeLarge(e) {
     if (e.matches) {
-        // console.log("It's large now")
+        console.log("It's large now")
         imgQuote3.classList.add("carousel-item-visible")
         carouselButtons.style.visibility = "hidden"
     }
