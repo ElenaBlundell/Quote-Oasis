@@ -154,8 +154,6 @@ header h3 {
 
 .carousel {
     display: flex;
-    /* justify-content: flex-start; */
-    /* height: 30vh; */
     text-align: center;
     margin-bottom: 1rem;
     color: #CBE4DE;
@@ -205,6 +203,7 @@ header h3 {
 .carousel .carousel-item,
 .carousel .carousel-item-hidden {
     display: none;
+    width: 100%;
 }
 
 .carousel .carousel-item-visible {
