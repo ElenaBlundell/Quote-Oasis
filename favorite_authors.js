@@ -111,14 +111,23 @@ function authorQuoteHtml(data) {
         <p id="author">${data.author}</p>
         </div>
     </div>
-    <div class="btn-block">
+    <div id="btn-block" class="btn-block">
         <a id="back-favorite-authors" href="favorite_authors.html" class="btn">Go back</a>
         <button id="next-quote-btn" class="btn">Next quote</button>
     </div>    
     `
+    const btnBlock = get("btn-block")
+    
+    if(authorQuotesArr.length > 1){
+        btnBlock.innerHTML += `
+        <button id="next-quote-btn" class="btn">Next quote</button>
+        `
+        getNextQuote(authorQuotesArr)
+    } 
+
     favoriteAuthors.classList.remove("flex-container")
     favoriteAuthors.classList.add("quote-card")
-    getNextQuote(authorQuotesArr)
+    
 }
 
 makeTopicsGrid()

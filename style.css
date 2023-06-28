@@ -95,6 +95,7 @@ nav {
     left: 0;
     top: 0;
     width: 40%;
+    max-width: 300px;
     visibility: hidden;
     transform: translateX(-50%);
     opacity: 0;

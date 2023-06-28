@@ -78,6 +78,7 @@ searchForm.addEventListener("submit", function (e) {
 // Step 1. Check if the search bar value is an existing author's name 
 
 searchBtn.addEventListener("click", function () {
+    // topicName?.classList.add("hidden")
     authorsSearchResult = []
     let lowerCaseAuthorsList = authorsList.map(author => author.toLowerCase())
     lowerCaseAuthorsList.forEach(author => {
@@ -86,7 +87,7 @@ searchBtn.addEventListener("click", function () {
             authorsSearchResult.push(authorsList[lowerCaseAuthorsList.indexOf(author)])
         }
     })
-    console.log(authorsList)
+
     return (authorsSearchResult.length === 0) ? searchQuote() : authorsListHtml()
 })
 
@@ -112,25 +113,27 @@ const topicName = get("topic-name")
 
 function getQuoteCardHtml() {
     let lowerCaseTopicsArr = allTopicsArr.map(topic => topic.toLowerCase())
-    if (lowerCaseTopicsArr.includes(searchBar.value)) {
-        topicName.textContent = `Quotes about ${searchBar.value.toLowerCase()}`
-        topicName.classList.remove("hidden")
-    }
 
-    quoteBlock.innerHTML = `<p id="quote" class="quote">"${quotesList[0].content}"</p>
-        <div class="author">
-            <img src="images/palm.png">
-        <p id="author">${quotesList[0].author}</p>
-        </div>
+    quoteBlock.innerHTML = `
+                        <p id="quote" class="quote">"${quotesList[0].content}"</p>
+                        <div class="author">
+                            <img src="images/palm.png">
+                            <p id="author">${quotesList[0].author}</p>
+                        </div>
         `
+    btnBlockHome.innerHTML = `<a href="index.html" class="btn">Go back</a>`
+
+    // if (lowerCaseTopicsArr.includes(searchBar.value)) {
+    //         topicName.textContent = `Quotes about ${searchBar.value.toLowerCase()}`
+    //         topicName.classList.remove("hidden")
+    //     }
+
     if(quotesList.length > 1){
-            btnBlockHome.innerHTML = `
-            <a href="index.html" class="btn">Go back</a>
+            btnBlockHome.innerHTML += `
             <button id="next-quote-btn" class="btn">Next quote</button>
             `
             getNextQuote(quotesList)
         } 
-    // btnBlock = `<button id="next-quote" class="btn">Next quote</button>`
 }
 
 // Step 2.AUTHORS. Display a list of options for a surched author
@@ -270,7 +273,6 @@ const slidesArr = Array.from(slidesDom)
 
 function randomSlideQuote(){
     
-    console.log(slidesArr)
     slidesArr.forEach(slide => {
         fetch(`${baseUrl}/random?minLength=40&maxLength=50`)
             .then(res => res.json())

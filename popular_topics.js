@@ -113,14 +113,21 @@ function topicQuoteHtml(data) {
             <p id="author">${data.author}</p>
         </div>
     </div>
-    <div class="btn-block">
+    <div id="btn-block" class="btn-block">
         <a id="back-popular-topics" href="popular_topics.html" class="btn">Go back</a>
-        <button id="get-pt-quote" class="btn">Get a quote</button>
     </div>    
     `
+    const btnBlock = get("btn-block")
+
+    if(topicQuotesArr.length > 1){
+        btnBlock.innerHTML += `
+        <button id="next-quote-btn" class="btn">Next quote</button>
+        `
+        getNextQuote(topicQuotesArr)
+    } 
+
     popularTopics.classList.remove("flex-container")
     popularTopics.classList.add("quote-card")
-    getNextQuote()
 }
 
 
@@ -160,26 +167,26 @@ backPopularTopics?.addEventListener("click", function () {
 
 
 
-function getNextQuote() {
-    const getPtQuote = get("get-pt-quote")
+function getNextQuote(data) {
+    const nextQuoteBtn = get("next-quote-btn")
     const quote = get("quote")
     const author = get("author")
 
-    let nextQuote = topicQuotesArr.shift()
+    let nextQuote = data.shift()
     let nextQuoteIndex = 0
 
-    getPtQuote.addEventListener("click", () => {
+    nextQuoteBtn.addEventListener("click", () => {
         
         if (nextQuoteIndex === 0) {
-            nextQuote = topicQuotesArr.shift()
+            nextQuote = data.shift()
         }
 
         quote.innerHTML = `"${nextQuote.content}"`
         author.innerHTML = `${nextQuote.author}`
 
-        nextQuote = topicQuotesArr.shift()
+        nextQuote = data.shift()
         if (!nextQuote) {
-            getPtQuote.disabled = true
+            nextQuoteBtn.disabled = true
         }
         nextQuoteIndex++
     })
