@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,400&display=swap"
         rel="stylesheet">
-    <title>My Quote of the Day</title>
+    <title>Quote Oasis</title>
 </head>
 
 <body>
@@ -33,42 +33,19 @@
     <header>
         <div class="top">
             <i id="menu-btn" class="fa-solid fa-bars fa-lg" style="color: #cbe4de;"></i>
-            <h1 class="logo">My <span>Quote</span> of the <span>Day</span></h1>
-            <i id="search-icon" class="fa fa-search fa-lg" aria-hidden="true"></i>
+            <h1 id="logo" class="logo">Quote Oasis</h1>
         </div>
-        <div class="search-container none" id="search-container">
-            <form>
-                <input type="search" id="search-bar" name="q" placeholder="Search for a specific topic">
-                <button type="submit" id="search-btn">Search</button>
-            </form>
-        </div>
-
     </header>
     <div id="carousel" class="carousel">
         <div class="carousel-item carousel-item-visible img-quote img-quote-1">
-            <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion,
-                some compassion, some humor, and some style.</p>
-            <div class="author">
-                <img src="images/palm.png">
-                <p>Maya Angelou</p>
-            </div>
         </div>
-        <div class="carousel-item img-quote img-quote-2 none">
-            <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion,
-                some compassion, some humor, and some style.</p>
-            <div class="author">
-                <img src="images/palm.png">
-                <p>Maya Angelou</p>
-            </div>
+
+        <div class="carousel-item img-quote img-quote-2 none" id="img-quote-2">
         </div>
-        <div class="carousel-item img-quote img-quote-3 none">
-            <p class="quote">My mission in life is not merely to survive, but to thrive; and to do so with some passion,
-                some compassion, some humor, and some style.</p>
-            <div class="author">
-                <img src="images/palm.png">
-                <p>Maya Angelou</p>
-            </div>
+
+        <div class="carousel-item img-quote img-quote-3 none" id="img-quote-3">
         </div>
+    
         <div id="carousel-buttons" class="carousel-actions">
             <button id="carousel-button-prev" aria-label="Previous Slidex"><</button> 
             <button id="carousel-button-next" aria-label="Next Slide">></button>
@@ -81,8 +58,9 @@
         <div id="all-topics" class="flex-container">
         </div>
     </main>
-    <!-- <script src="index.js" type="module"></script> -->
     <script src="all_topics.js" type="module"></script>
+    <script src="carousel.js" type="module"></script>
+    <script src="responsive.js" type="module"></script>
 </body>
 
 </html>

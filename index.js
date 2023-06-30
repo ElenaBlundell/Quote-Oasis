@@ -1,16 +1,17 @@
-import {
-    allTopicsArr,
-    baseUrl
-} from './data.js'
+import {allTopicsArr, baseUrl} from './data.js'
+import {carouselButtons} from './carousel.js'
 
-const get = element => document.getElementById(element);
+const get = element => document.getElementById(element)
 
 // Access main page elements
 const main = get("main")
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
-// const addBtn = get("add-btn")
-const btnBlockHome = get("btn-block-home")
+const btnBlock = get("btn-block")
+// const addBtn = get("add-btn") Make a list of favorite quotes
+
+const quote = get("quote")
+const author = get("author")
 
 
 // HEADER
@@ -20,7 +21,7 @@ searchIcon.addEventListener("click", () => {
     searchContainer.classList.remove("none")
 })
 
-// Navigation Menu
+// NAVIGATIN MENU
 const open = get("menu-btn")
 const nav = get("nav")
 const exit = get("exit-btn")
@@ -28,15 +29,16 @@ const exit = get("exit-btn")
 open.addEventListener("click", () => {
     nav.classList.add("open-nav")
     searchContainer.classList.add("none")
-    searchIcon.style.visibility = "visible"
-    carousel.style.position = "static"
+    searchIcon.classList.add("disabled")
     carouselButtons.style.visibility = "hidden"
+    quoteBtn.disabled = true
 })
 
 exit.addEventListener("click", () => {
     nav.classList.remove('open-nav')
-    carousel.style.position = "relative"
+    searchIcon.classList.remove("disabled")
     carouselButtons.style.visibility = "visible"
+    quoteBtn.disabled = false
 })
 
 // SEARCH FIELD
@@ -47,38 +49,64 @@ const searchBar = get("search-bar")
 const searchBtn = get("search-btn")
 let authorsList = []
 let authorsSearchResult = []
-let quotesList = []
-
-
-// Getting a list of authors that stored in data base
-getAuthorsList()
-
-// Recursive function, that querying page after page until all pages data is stored in authorsList
-
-function getAuthorsList(pageNum = 1) {
-    fetch(`${baseUrl}/authors?sortBy=name&page=${pageNum}`)
-        .then(response => response.json())
-        .then(data => {
-            data.results.forEach(result => authorsList.push(result.name))
-            console.log(authorsList)
-            if (pageNum !== data.totalPages){
-                pageNum++
-                return getAuthorsList(pageNum)
-            }
-        })
-    console.log(authorsList)
-}
-
-
+let topicSearchResult = ""
+let quotesArr = []
 
 searchForm.addEventListener("submit", function (e) {
     e.preventDefault()
 })
 
-// Step 1. Check if the search bar value is an existing author's name 
+// SEARCH
+
+// Getting a list of authors that stored in the data base
+getAuthorsList()
+
+// Recursive function, that querying page after page until all pages data is stored in authorsList
+function getAuthorsList(pageNum = 1) {
+    fetch(`${baseUrl}/authors?sortBy=name&page=${pageNum}`)
+        .then(response => response.json())
+        .then(data => {
+            data.results.forEach(result => authorsList.push(result.name))
+            if (pageNum !== data.totalPages){
+                pageNum++
+                return getAuthorsList(pageNum)
+            }
+        })
+}
+// Step 1.1 QUOTES. Check if the search bar value is an existing topic
 
 searchBtn.addEventListener("click", function () {
-    // topicName?.classList.add("hidden")
+
+    topicSearchResult = ""
+
+    let lowerCaseTopicsArr= allTopicsArr.map(topic => topic.toLowerCase())
+    lowerCaseTopicsArr.forEach(topic => {
+        if (topic.includes(searchBar.value.toLowerCase())) {
+            topicSearchResult = topic
+        }
+    })
+
+    return (topicSearchResult) ? getTopicQuotes(topicSearchResult) : searchQuote()
+})
+
+// Step 1.2 QUOTES. Check if the search bar value can be found in a quote.
+//      (Store all found quotes for a searched value in an array and check if it's empty or not)
+
+async function searchQuote() {
+    quotesArr = []
+    const res = await fetch(`${baseUrl}/search/quotes?query=${searchBar.value}&limit=150`)
+    const data = await res.json()
+    data.results.forEach(result => quotesArr.push({
+        "content": result.content,
+        "author": result.author
+        }))
+    
+    return (quotesArr.length !== 0) ? quoteCardHtml(quotesArr) : searchAuthor()
+}
+
+// Step 1.3 Check if the search bar value is an existing author's name
+
+function searchAuthor(){
     authorsSearchResult = []
     let lowerCaseAuthorsList = authorsList.map(author => author.toLowerCase())
     lowerCaseAuthorsList.forEach(author => {
@@ -87,52 +115,49 @@ searchBtn.addEventListener("click", function () {
             authorsSearchResult.push(authorsList[lowerCaseAuthorsList.indexOf(author)])
         }
     })
-
-    return (authorsSearchResult.length === 0) ? searchQuote() : authorsListHtml()
-})
-
-// Step 2.QUOTES. Store all quotes for a requested topic in an array
-
-async function searchQuote() {
-    quotesList = []
-    const res = await fetch(`${baseUrl}/search/quotes?query=${searchBar.value}&limit=150`)
-    const data = await res.json()
-    data.results.forEach(result => quotesList.push({
-        "content": result.content,
-        "author": result.author
-        }))
-
-    return (quotesList.length !== 0) 
-            ? getQuoteCardHtml()
-            : alert(`No quotes for your request were found`) 
+    return (authorsSearchResult.length !== 0) ? authorsListHtml() : alert(`No quotes for your request were found`)
 }
 
-const topicName = get("topic-name")
+// Step 2.QUOTES. Get an array of quotes for a searched topic
+
+let topicQuotesArr = []
+
+function getTopicQuotes(topic){
+    
+    fetch(`${baseUrl}/quotes?tags=${topic}&limit=150`)
+                .then(response => response.json())
+                .then(data => {
+                    topicQuotesArr = data.results
+                    quoteCardHtml(topicQuotesArr)
+                })      
+}
 
 // Step 3.QUOTES. Display a quote for a surched topic
 
-function getQuoteCardHtml() {
-    let lowerCaseTopicsArr = allTopicsArr.map(topic => topic.toLowerCase())
+function quoteCardHtml(data) {
+    
+    if(!get("quote-block")){
+        main.innerHTML = `<div id="quote-block" class="quote-block"></div>
+                          <div id="btn-block" class="btn-block"></div>`
+    }
+    const quoteBlock = get("quote-block")
 
     quoteBlock.innerHTML = `
-                        <p id="quote" class="quote">"${quotesList[0].content}"</p>
-                        <div class="author">
-                            <img src="images/palm.png">
-                            <p id="author">${quotesList[0].author}</p>
-                        </div>
-        `
-    btnBlockHome.innerHTML = `<a href="index.html" class="btn">Go back</a>`
+            <p class="quote" id="quote">"${data[0].content}"</p>
+            <div class="author">
+                <img src="images/palm.png">
+            <p id="author">${data[0].author}</p>
+            </div>
+    `
+    
+    const btnBlock = get("btn-block")
+    btnBlock.innerHTML = `<a href="index.html" class="btn">Go back</a>`
 
-    // if (lowerCaseTopicsArr.includes(searchBar.value)) {
-    //         topicName.textContent = `Quotes about ${searchBar.value.toLowerCase()}`
-    //         topicName.classList.remove("hidden")
-    //     }
-
-    if(quotesList.length > 1){
-            btnBlockHome.innerHTML += `
+    if(data.length > 1){
+            btnBlock.innerHTML += `
             <button id="next-quote-btn" class="btn">Next quote</button>
             `
-            getNextQuote(quotesList)
+            getNextQuote(data)
         } 
 }
 
@@ -151,7 +176,7 @@ function authorsListHtml() {
     getAuthorQuotes()
 }
 
-// Step 3.AUTHORS. Get a quote from a chosen(clicked) author
+// Step 3.AUTHORS. Get a quote from a chosen(clicked on) author
 
 let authorQuotesArr = []
 
@@ -164,16 +189,20 @@ function getAuthorQuotes() {
                 .then(response => response.json())
                 .then(data => {
                     authorQuotesArr = data.results
-                    authorQuoteHtml(authorQuotesArr[0])
+                    if(authorQuotesArr.length !== 0){
+                        authorQuoteHtml(authorQuotesArr[0])
+                    }
+                    
                 })
         })
     })
 }
 
 // Step 4.AUTHORS. Display a quote from a chosen(clicked) author
+
 function authorQuoteHtml(data) {
 
-    authorsCardsList.innerHTML = `<div id="quote-block">
+    authorsCardsList.innerHTML = `<div id="new-quote-block" class="quote-block">
         <p class="quote" id="quote">"${data.content}"</p>
         <div class="author">
             <img src="images/palm.png">
@@ -182,7 +211,6 @@ function authorQuoteHtml(data) {
     </div>
     <div id="btn-block" class="btn-block">
          <a href="index.html" class="btn">Go back</a>
-        
     </div>    
     `
     authorsCardsList.classList.remove("flex-container")
@@ -195,7 +223,7 @@ function authorQuoteHtml(data) {
     } 
 }
 
-// Display next quote for a chosen author/topic after a click on a "Next quote" button
+// Step 5. Display next quote for a chosen author/topic after a click on a "Next quote" button
 
 function getNextQuote(data) {
     const nextQuoteBtn = get("next-quote-btn")
@@ -222,71 +250,22 @@ function getNextQuote(data) {
     })
 }
 
-// CAROUSEL OF SLIDES
+// GET A RANDOM QUOTE
 
-const carousel = get("carousel")
-const slides = document.getElementsByClassName('carousel-item')
-let slidePosition = 0
-const totalSlides = slides.length
-const carouselButtons = get("carousel-buttons")
-const imgQuote2 = get("img-quote-2")
-const imgQuote3 = get("img-quote-3")
+quoteBtn.addEventListener("click", () => {
+    fetch(`${baseUrl}/random`)
+        .then(response => response.json())
+        .then(data => {
+            quoteBlock.innerHTML = getQuoteHtml(data)
+        })
+})
 
-document.getElementById('carousel-button-next').addEventListener("click", moveToNextSlide);
-document.getElementById('carousel-button-prev').addEventListener("click", moveToPrevSlide);
-
-function hideAllSlides() {
-    for (let slide of slides) {
-        slide.classList.remove("carousel-item-visible");
-        slide.classList.add("carousel-item-hidden");
-    }
-}
-
-function moveToNextSlide() {
-    hideAllSlides();
-
-    if (slidePosition === totalSlides - 1) {
-        slidePosition = 0;
-    } else {
-        slidePosition++;
-    }
-
-    slides[slidePosition].classList.add("carousel-item-visible");
-}
-
-function moveToPrevSlide() {
-    hideAllSlides();
-
-    if (slidePosition === 0) {
-        slidePosition = totalSlides - 1;
-    } else {
-        slidePosition--;
-    }
-
-    slides[slidePosition].classList.add("carousel-item-visible");
-}
-
-// Random Quote for each slide
-
-let slidesDom = document.getElementsByClassName("carousel-item")
-const slidesArr = Array.from(slidesDom)
-
-function randomSlideQuote(){
-    
-    slidesArr.forEach(slide => {
-        fetch(`${baseUrl}/random?minLength=40&maxLength=50`)
-            .then(res => res.json())
-            .then(data => slide.innerHTML = getSlideQuoteHtml(data))
-    })
-}
-
-randomSlideQuote()
-
-function getSlideQuoteHtml(data){
-    return `<p class="quote">"${data.content}"</p>
+function getQuoteHtml(data) {
+    return `
+            <p class="quote">"${data.content}"</p>
             <div class="author">
                 <img src="images/palm.png">
-                <p>${data.author}</p>
+            <p>${data.author}</p>
             </div>`
 }
 
@@ -304,76 +283,3 @@ function getSlideQuoteHtml(data){
 //             })
 //             return authorImgSource
 // }
-
-
-// GET A RANDOM QUOTE
-
-quoteBtn.addEventListener("click", () => {
-    fetch(`${baseUrl}/random`)
-        .then(response => response.json())
-        .then(data => {
-            quoteBlock.innerHTML = getQuoteHtml(data)
-        })
-})
-
-function getQuoteHtml(data) {
-    // let authorImg = getAuthorImg(data)
-    return `
-            <p class="quote">"${data.content}"</p>
-            <div class="author">
-                <img src="images/palm.png">
-            <p>${data.author}</p>
-            </div>`
-}
-
-// RESPONSIVE DESIGN
-const navList = get("nav-list")
-
-const mediaQuerySmall = window.matchMedia("(max-width: 499px)")
-const mediaQueryMedium = window.matchMedia("(min-width: 500px)")
-const mediaQueryMediumL = window.matchMedia("(max-width: 749px)")
-const mediaQueryLarge = window.matchMedia("(min-width: 750px)")
-
-function handleScreenChangeSmall(e) {
-    if (e.matches) {
-        console.log("It is small now!")
-        imgQuote2.classList.remove("carousel-item-visible")
-    }
-}
-
-function handleScreenChangeMedium(e) {
-    if (e.matches) {
-        console.log("Media Query Matched Medium!")
-        imgQuote2.classList.add("carousel-item-visible")
-        
-    }
-}
-
-function handleScreenChangeMediumL(e) {
-    if (e.matches) {
-        console.log("it is mL now")
-        imgQuote3.classList.remove("carousel-item-visible")
-        carouselButtons.style.visibility = "visible"
-        navList.style.fontSize = "10px"
-    }
-}
-
-function handleScreenChangeLarge(e) {
-    if (e.matches) {
-        console.log("It's large now")
-        imgQuote3.classList.add("carousel-item-visible")
-        carouselButtons.style.visibility = "hidden"
-    }
-}
-
-// Register event listener
-mediaQuerySmall.addEventListener("change", handleScreenChangeSmall)
-mediaQueryMedium.addEventListener("change", handleScreenChangeMedium)
-mediaQueryMediumL.addEventListener("change", handleScreenChangeMediumL)
-mediaQueryLarge.addEventListener("change", handleScreenChangeLarge)
-
-// Initial check
-handleScreenChangeSmall(mediaQuerySmall)
-handleScreenChangeMedium(mediaQueryMedium)
-handleScreenChangeMediumL(mediaQueryMediumL)
-handleScreenChangeLarge(mediaQueryLarge)

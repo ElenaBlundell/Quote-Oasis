@@ -22,28 +22,27 @@ body {
 
 #menu-btn,
 #search-icon {
-    /* display: block; */
-    /* width: 2rem;
-    height: 2rem; */
-    width: 1.5rem;
+    width: 1.5em;
     height: auto;
     cursor: pointer;
 }
 
 .logo {
-    font-size: 1.8rem;
-    margin: 0 1rem;
-    font-family: 'Berkshire Swash', cursive;
+    font-size: 2.5rem;
+    margin: 0 1em;
+    /* font-family: 'Berkshire Swash', cursive; */
     color: #CBE4DE;
+}
+
+.logo,
+h2 {
+    font-family: 'Berkshire Swash', cursive;
 }
 
 .search-container {
     align-self: center;
-    /* display: flex; */
-    /* justify-content: space-between; */
     width: 90%;
     max-width: 500px;
-    /* padding: 0; */
 }
 
 #search-bar {
@@ -53,12 +52,11 @@ body {
     border-radius: 5px;
     background: transparent;
     width: 77%;
-    /* margin-right: 10px; */
 }
 
 .search-container button,
 #search-bar:hover {
-    padding: 1.04em;
+    padding: 1em;
     border: none;
     border-radius: 5px;
     background-color: #CBE4DE;
@@ -76,16 +74,16 @@ body {
 
 .inner-wrapper {
     margin-left: -20px;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
 .inner-wrapper img {
-    height: 1rem;
-    margin: 0 1rem;
+    height: 1em;
+    margin: 0 1em;
 }
 
 nav {
@@ -102,7 +100,7 @@ nav {
     transition: all .3s;
     text-align: left;
     color: #CBE4DE;
-    padding-left: 2rem;
+    padding-left: 2em;
     z-index: 1;
 }
 
@@ -122,7 +120,7 @@ a {
 
 header {
     background-color: #2C3333;
-    height: 18vh;
+    height: 20vh;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -134,17 +132,11 @@ header {
 
 header .top {
     width: 90%;
+    max-width: 800px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-self: center;
-}
-
-header h3 {
-    font-weight: 300;
-    font-size: 0.9rem;
-    margin-top: 0.4rem;
-    font-style: italic;
 }
 
 .open-nav {
@@ -156,7 +148,8 @@ header h3 {
 .carousel {
     display: flex;
     text-align: center;
-    margin-bottom: 1rem;
+    height: 25%;
+    margin-bottom: 1em;
     color: #CBE4DE;
     position: relative;
 }
@@ -185,7 +178,8 @@ header h3 {
 }
 
 .none {
-    /* Should be placed after .corousel selector's rules so "display: flex;" will not affect it */
+    /* Should be placed after .corousel selector's rules
+     so "display: flex;" will not affect it */
     display: none;
 }
 
@@ -265,22 +259,23 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
+    max-width: 900px;
 }
 
 h2 {
     color: #2E4F4F;
-    /* margin-top: 0; */
 }
 
-#quote-block {
+.quote-block {
     background-color: #0E8388;
     color: #CBE4DE;
     text-align: center;
     width: 90%;
     max-width: 500px;
     border-radius: 20px;
-    margin-bottom: 1.5rem;
-    padding: 1rem 2rem;
+    margin-bottom: 1.5em;
+    padding: 1em 2em;
 }
 
 .quote {
@@ -288,12 +283,11 @@ h2 {
 }
 
 .btn {
-    padding: 0.7rem 1.2rem;
+    padding: 0.7em 1.2em;
     font-size: 1rem;
-    /* border-radius: 18px; */
 }
 
-/* POPULAR TOPICS */
+/* CARDS */
 
 .flex-container {
     width: 90%;
@@ -303,7 +297,7 @@ h2 {
 }
 
 .flex-card {
-    padding: 0.2rem 2rem;
+    padding: 0.2em 2em;
     flex: 1 0 30%;
     margin-top: 0.3em;
     margin-right: 0.5em;
@@ -324,8 +318,6 @@ h2 {
     cursor: pointer;
 }
 
-/* #get-quote-btn:hover,
-#get-quote-btn:focus, */
 .btn:hover,
 .btn:active,
 .flex-card:hover {
