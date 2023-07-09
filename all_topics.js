@@ -45,6 +45,7 @@ const allTopics = get("all-topics")
 
 function makeTopicsGrid() {
     allTopicsArr.forEach(topic => {
+        // these need to be `button` elements as well in order to be accessible and keyboard focusable
         allTopics.innerHTML += `<div class="flex-card">
             <p>${topic}</p>
         </div>`
