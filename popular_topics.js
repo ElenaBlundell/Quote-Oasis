@@ -1,5 +1,6 @@
 import {baseUrl, popularTopicsArr} from './data.js'
 import {carouselButtons} from './carousel.js'
+// import {getNextQuote} from './index.js'
 
 const get = element => document.getElementById(element);
 
@@ -40,6 +41,8 @@ exit.addEventListener("click", () => {
 // POPULAR TOPICS
 
 const popularTopics = get("popular-topics")
+
+// Display topic cards
 
 makeTopicsGrid()
 
@@ -94,9 +97,6 @@ function getTopicQuotes() {
                     topicQuoteHtml(topicQuotesArr[0])
                 })
                 
-                // if (cardName.endsWith("al")) {
-                //     cardName = cardName.substring(0, cardName.length - 2)
-                // }
                 topicName.textContent = `${cardName} Quotes`
                 topicName.classList.remove("hidden")
         })
@@ -135,7 +135,5 @@ function getNextQuote(data) {
             nextQuoteBtn.disabled = true
         }
         nextQuoteIndex++
-    })
-
-    
+    }) 
 }
