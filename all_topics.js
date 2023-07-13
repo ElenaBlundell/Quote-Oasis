@@ -1,6 +1,6 @@
-import {baseUrl} from "./data.js"
+import {allTopicsArr} from './data.js'
 import {carouselButtons} from './carousel.js'
-import {makeTopicsGrid, quoteCardHtml, getNextQuote} from './main_functions.js'
+import {flexCardsCollection, makeTopicsGrid, getCards} from './main_functions.js'
 
 const get = element => document.getElementById(element);
 
@@ -10,8 +10,6 @@ const exit = get("exit-btn")
 const allTopics = get("all-topics")
 
 const carousel = get("carousel")
-
-const flexCardsCollection = document.getElementsByClassName("flex-card")
 
 open.addEventListener("click", () => {
     const flexCardsArr = Array.from(flexCardsCollection)
@@ -39,38 +37,16 @@ exit.addEventListener("click", () => {
 
 // ALL TOPICS
 
-import {allTopicsArr} from './data.js'
-
 // STEP 1. Display all topics cards
 
 makeTopicsGrid(allTopicsArr, allTopics)
 
-const main = get("main")
+// STEP 2. Access all of the cards and add event listeners
 
-let topicQuotesArr = []
+getCards(allTopicsArr, "all_topics.html")
 
-function getTopicCards() {
-    const flexCardsArr = Array.from(flexCardsCollection)
-    flexCardsArr.forEach(card => {
-        let cardName = allTopicsArr[flexCardsArr.indexOf(card)]
-        card.addEventListener("click", () => {
+// STEP 3. Fetch data for a chosen topic
+// getTopicQuotes(topic, page)
 
-            getTopicQuotes(cardName)
-        })
-    })
-}
-
-function getTopicQuotes(topic){
-    fetch(`${baseUrl}/quotes?tags=${topic}&limit=150`)
-                .then(response => response.json())
-                .then(data => {
-                    topicQuotesArr = data.results
-                    if( topic === "Famous Quotes") {
-                        const lastIndex = topic.lastIndexOf(" ");
-                        topic = topic.substring(0, lastIndex);
-                    }
-                    quoteCardHtml(topicQuotesArr, topic, "all_topics.html")
-                })
-}
-
-getTopicCards()
+// STEP 4. Render a quote-block and "Go back" "Next quote" buttons
+// quoteCardHtml(topicQuotesArr, topic, page)

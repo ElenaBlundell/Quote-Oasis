@@ -1,6 +1,6 @@
 import {allTopicsArr, baseUrl} from './data.js'
 import {carouselButtons} from './carousel.js'
-import {quoteCardHtml, getNextQuote} from './main_functions.js'
+import {quoteCardHtml, getTopicQuotes} from './main_functions.js'
 
 const get = element => document.getElementById(element)
 
@@ -8,11 +8,6 @@ const get = element => document.getElementById(element)
 const main = get("main")
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
-const btnBlock = get("btn-block")
-
-const quote = get("quote")
-const author = get("author")
-
 
 // HEADER
 const searchIcon = get("search-icon")
@@ -86,7 +81,7 @@ searchBtn.addEventListener("click", function () {
         }
     })
 
-    return (topicSearchResult) ? getTopicQuotes(topicSearchResult) : searchQuote()
+    return (topicSearchResult) ? getTopicQuotes(topicSearchResult, "index.html") : searchQuote()
 })
 
 // Step 1.2 QUOTES. Check if the search bar value can be found in a quote.
@@ -118,48 +113,13 @@ function searchAuthor(){
     return (authorsSearchResult.length !== 0) ? authorsListHtml() : alert(`No quotes for your request were found`)
 }
 
-// Step 2.QUOTES. Get an array of quotes for a searched topic
+// Step 2.QUOTES. Get an array of quotes for a searched topic   
 
-let topicQuotesArr = []
-
-function getTopicQuotes(topic){
-    
-    fetch(`${baseUrl}/quotes?tags=${topic}&limit=150`)
-                .then(response => response.json())
-                .then(data => {
-                    topicQuotesArr = data.results
-                    quoteCardHtml(topicQuotesArr, topic, "index.html")
-                })      
-}
+// getTopicQuotes(topicSearchResult, "index.html")
+   
 
 // Step 3.QUOTES. Display a quote for a surched topic
 
-// function quoteCardHtml(data) {
-    
-//     if(!get("quote-block")){
-//         main.innerHTML = `<div id="quote-block" class="quote-block"></div>
-//                           <div id="btn-block" class="btn-block"></div>`
-//     }
-//     const quoteBlock = get("quote-block")
-
-//     quoteBlock.innerHTML = `
-//             <p class="quote" id="quote">"${data[0].content}"</p>
-//             <div class="author">
-//                 <img src="images/palm.png">
-//             <p id="author">${data[0].author}</p>
-//             </div>
-//     `
-    
-//     const btnBlock = get("btn-block")
-//     btnBlock.innerHTML = `<a href="index.html" class="btn">Go back</a>`
-
-//     if(data.length > 1){
-//             btnBlock.innerHTML += `
-//             <button id="next-quote-btn" class="btn">Next quote</button>
-//             `
-//             getNextQuote(data)
-//         } 
-// }
 
 // Step 2.AUTHORS. Display a list of options for a surched author
 

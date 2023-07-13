@@ -1,6 +1,7 @@
 import {favoriteAuthorsArr} from './data.js'
 import {carouselButtons} from './carousel.js'
-import {getNextQuote} from './main_functions.js'
+import {flexCardsCollection, makeTopicsGrid, getCards} from './main_functions.js'
+
 
 
 const get = element => document.getElementById(element);
@@ -39,42 +40,49 @@ exit.addEventListener("click", () => {
 
 const favoriteAuthors = get("favorite-authors")
 
-function makeTopicsGrid() {
-    favoriteAuthorsArr.forEach(author => {
-        favoriteAuthors.innerHTML += `<div class="flex-card">
-            <p>${author}</p>
-        </div>`
-    })
-}
+makeTopicsGrid(favoriteAuthorsArr, favoriteAuthors)
 
-function authorQuoteHtml(data) {
+// STEP 2. Access all of the cards and add event listeners
 
-    favoriteAuthors.innerHTML = `<div id="quote-block" class="quote-block">
-        <p class="quote" id="quote">"${data.content}"</p>
-        <div class="author">
-            <img src="images/palm.png">
-        <p id="author">${data.author}</p>
-        </div>
-    </div>
-    <div id="btn-block" class="btn-block">
-        <a id="back-favorite-authors" href="favorite_authors.html" class="btn">Go back</a>
-    </div>    
-    `
-    const btnBlock = get("btn-block")
+getCards(authorQuotesArr, "popular_topics.html")
 
-    if(authorQuotesArr.length > 1){
-        btnBlock.innerHTML += `
-        <button id="next-quote-btn" class="btn">Next quote</button>
-        `
-        getNextQuote(authorQuotesArr)
-    } 
+// STEP 3. Fetch data for a chosen topic
+// getTopicQuotes(topic, page)
 
-    favoriteAuthors.classList.remove("flex-container")
-    favoriteAuthors.classList.add("quote-card")
+// STEP 4. Render a quote-block and "Go back" "Next quote" buttons
+// quoteCardHtml(topicQuotesArr, topic, page)
+
+
+
+
+
+
+// function authorQuoteHtml(data) {
+
+//     favoriteAuthors.innerHTML = `<div id="quote-block" class="quote-block">
+//         <p class="quote" id="quote">"${data.content}"</p>
+//         <div class="author">
+//             <img src="images/palm.png">
+//         <p id="author">${data.author}</p>
+//         </div>
+//     </div>
+//     <div id="btn-block" class="btn-block">
+//         <a id="back-favorite-authors" href="favorite_authors.html" class="btn">Go back</a>
+//     </div>    
+//     `
+//     const btnBlock = get("btn-block")
+
+//     if(authorQuotesArr.length > 1){
+//         btnBlock.innerHTML += `
+//         <button id="next-quote-btn" class="btn">Next quote</button>
+//         `
+//         getNextQuote(authorQuotesArr)
+//     } 
+
+//     favoriteAuthors.classList.remove("flex-container")
+//     favoriteAuthors.classList.add("quote-card")
     
-}
-
-makeTopicsGrid()
+// }
 
 let authorQuotesArr = []
 

@@ -1,10 +1,12 @@
+import {baseUrl} from './data.js'
+
 
 const get = element => document.getElementById(element);
 
-function makeTopicsGrid(topicsArr, section) {
-    topicsArr.forEach(topic => {
+function makeTopicsGrid(arr, section) {
+    arr.forEach(itemName => {
         section.innerHTML += `<div class="flex-card">
-            <p>${topic}</p>
+            <p>${itemName}</p>
         </div>`
     })
 }
@@ -73,6 +75,35 @@ function getNextQuote(data) {
     })
 }
 
+// Access all of the cards and add event listeners
 
+const flexCardsCollection = document.getElementsByClassName("flex-card")
 
-export {makeTopicsGrid, quoteCardHtml, getNextQuote}
+function getCards(arr, page) {
+    const flexCardsArr = Array.from(flexCardsCollection)
+    flexCardsArr.forEach(card => {
+        let cardName = arr[flexCardsArr.indexOf(card)]
+        card.addEventListener("click", () => {
+
+            getTopicQuotes(cardName, page)
+        })
+    })
+}
+
+// Fetch data for a chosen topic
+
+function getTopicQuotes(topic, page){
+    let topicQuotesArr = []
+    fetch(`${baseUrl}/quotes?tags=${topic}&limit=150`)
+                .then(response => response.json())
+                .then(data => {
+                    topicQuotesArr = data.results
+                    if( topic === "Famous Quotes") {
+                        const lastIndex = topic.lastIndexOf(" ");
+                        topic = topic.substring(0, lastIndex);
+                    }
+                    quoteCardHtml(topicQuotesArr, topic, page)
+                })
+}
+
+export {makeTopicsGrid, getTopicQuotes, quoteCardHtml, getNextQuote, flexCardsCollection, getCards}
