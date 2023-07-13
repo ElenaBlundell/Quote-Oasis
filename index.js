@@ -1,5 +1,6 @@
 import {allTopicsArr, baseUrl} from './data.js'
 import {carouselButtons} from './carousel.js'
+import {quoteCardHtml, getNextQuote} from './main_functions.js'
 
 const get = element => document.getElementById(element)
 
@@ -8,7 +9,6 @@ const main = get("main")
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
 const btnBlock = get("btn-block")
-// const addBtn = get("add-btn") Make a list of favorite quotes
 
 const quote = get("quote")
 const author = get("author")
@@ -101,7 +101,7 @@ async function searchQuote() {
         "author": result.author
         }))
     
-    return (quotesArr.length !== 0) ? quoteCardHtml(quotesArr) : searchAuthor()
+    return (quotesArr.length !== 0) ? quoteCardHtml(quotesArr, searchBar.value, "index.html") : searchAuthor()
 }
 
 // Step 1.3 Check if the search bar value is an existing author's name
@@ -128,38 +128,38 @@ function getTopicQuotes(topic){
                 .then(response => response.json())
                 .then(data => {
                     topicQuotesArr = data.results
-                    quoteCardHtml(topicQuotesArr)
+                    quoteCardHtml(topicQuotesArr, topic, "index.html")
                 })      
 }
 
 // Step 3.QUOTES. Display a quote for a surched topic
 
-function quoteCardHtml(data) {
+// function quoteCardHtml(data) {
     
-    if(!get("quote-block")){
-        main.innerHTML = `<div id="quote-block" class="quote-block"></div>
-                          <div id="btn-block" class="btn-block"></div>`
-    }
-    const quoteBlock = get("quote-block")
+//     if(!get("quote-block")){
+//         main.innerHTML = `<div id="quote-block" class="quote-block"></div>
+//                           <div id="btn-block" class="btn-block"></div>`
+//     }
+//     const quoteBlock = get("quote-block")
 
-    quoteBlock.innerHTML = `
-            <p class="quote" id="quote">"${data[0].content}"</p>
-            <div class="author">
-                <img src="images/palm.png">
-            <p id="author">${data[0].author}</p>
-            </div>
-    `
+//     quoteBlock.innerHTML = `
+//             <p class="quote" id="quote">"${data[0].content}"</p>
+//             <div class="author">
+//                 <img src="images/palm.png">
+//             <p id="author">${data[0].author}</p>
+//             </div>
+//     `
     
-    const btnBlock = get("btn-block")
-    btnBlock.innerHTML = `<a href="index.html" class="btn">Go back</a>`
+//     const btnBlock = get("btn-block")
+//     btnBlock.innerHTML = `<a href="index.html" class="btn">Go back</a>`
 
-    if(data.length > 1){
-            btnBlock.innerHTML += `
-            <button id="next-quote-btn" class="btn">Next quote</button>
-            `
-            getNextQuote(data)
-        } 
-}
+//     if(data.length > 1){
+//             btnBlock.innerHTML += `
+//             <button id="next-quote-btn" class="btn">Next quote</button>
+//             `
+//             getNextQuote(data)
+//         } 
+// }
 
 // Step 2.AUTHORS. Display a list of options for a surched author
 
@@ -185,68 +185,17 @@ function getAuthorQuotes() {
     const authorsCardsArr = Array.from(authorsCardsCollection)
     authorsCardsArr.forEach(card => {
         card.addEventListener("click", () => {
-            fetch(`https://api.quotable.io/quotes?author=${authorsSearchResult[authorsCardsArr.indexOf(card)]}`)
+            const author = authorsSearchResult[authorsCardsArr.indexOf(card)]
+            fetch(`https://api.quotable.io/quotes?author=${author}`)
                 .then(response => response.json())
                 .then(data => {
                     authorQuotesArr = data.results
                     if(authorQuotesArr.length !== 0){
-                        authorQuoteHtml(authorQuotesArr[0])
+                        quoteCardHtml(authorQuotesArr, author, "index.html" )
                     }
                     
                 })
         })
-    })
-}
-
-// Step 4.AUTHORS. Display a quote from a chosen(clicked) author
-
-function authorQuoteHtml(data) {
-
-    authorsCardsList.innerHTML = `<div id="new-quote-block" class="quote-block">
-        <p class="quote" id="quote">"${data.content}"</p>
-        <div class="author">
-            <img src="images/palm.png">
-        <p id="author">${data.author}</p>
-        </div>
-    </div>
-    <div id="btn-block" class="btn-block">
-         <a href="index.html" class="btn">Go back</a>
-    </div>    
-    `
-    authorsCardsList.classList.remove("flex-container")
-    authorsCardsList.classList.add("quote-card")
-
-    if(authorQuotesArr.length > 1){
-        const btnBlock = get("btn-block")
-        btnBlock.innerHTML += `<button id="next-quote-btn" class="btn">Next quote</button>`
-        getNextQuote(authorQuotesArr)
-    } 
-}
-
-// Step 5. Display next quote for a chosen author/topic after a click on a "Next quote" button
-
-function getNextQuote(data) {
-    const nextQuoteBtn = get("next-quote-btn")
-    const quote = get("quote")
-    const author = get("author")
-
-    let nextQuote = data.shift()
-    let nextQuoteIndex = 0
-    
-    nextQuoteBtn.addEventListener("click", () => {
-
-        if (nextQuoteIndex === 0) {
-            nextQuote = data.shift()
-        }
-
-        quote.innerHTML = `"${nextQuote.content}"`
-        author.innerHTML = `${nextQuote.author}`
-
-        nextQuote = data.shift()
-        if (!nextQuote) {
-            nextQuoteBtn.disabled = true
-        }
-        nextQuoteIndex++
     })
 }
 
@@ -268,18 +217,3 @@ function getQuoteHtml(data) {
             <p>${data.author}</p>
             </div>`
 }
-
-// function getAuthorImg(data){
-//     let authorImgSource = ""
-//     let author = data.author
-//     let authorFetch = author.replace(/ /g, "%20")
-//     console.log(authorFetch)
-//     fetch(`https://en.wikipedia.org/w/api.php?action=query&
-//                 titles=${authorFetch}&formatversion=2&prop=pageimages&format=json&pithumbsize=250`)
-//             .then(response => response.json())
-//             .then(img => {
-//                 console.log(img.query.pages[0].thumbnail.source)
-//                 authorImgSource = img.query.pages[0].thumbnail.source
-//             })
-//             return authorImgSource
-// }

@@ -1,5 +1,6 @@
 import {favoriteAuthorsArr} from './data.js'
 import {carouselButtons} from './carousel.js'
+import {getNextQuote} from './main_functions.js'
 
 
 const get = element => document.getElementById(element);
@@ -35,7 +36,6 @@ exit.addEventListener("click", () => {
 })
 
 // Favorite Authors
-
 
 const favoriteAuthors = get("favorite-authors")
 
@@ -93,28 +93,3 @@ function getAuthorQuotes() {
 }
 
 getAuthorQuotes()
-
-function getNextQuote(data) {
-    const nextQuoteBtn = get("next-quote-btn")
-    const quote = get("quote")
-    const author = get("author")
-
-    let nextQuote = data.shift()
-    let nextQuoteIndex = 0
-    
-    nextQuoteBtn.addEventListener("click", () => {
-
-        if (nextQuoteIndex === 0) {
-            nextQuote = data.shift()
-        }
-
-        quote.innerHTML = `"${nextQuote.content}"`
-        author.innerHTML = `${nextQuote.author}`
-
-        nextQuote = data.shift()
-        if (!nextQuote) {
-            nextQuoteBtn.disabled = true
-        }
-        nextQuoteIndex++
-    })
-}

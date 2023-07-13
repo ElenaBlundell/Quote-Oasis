@@ -1,6 +1,6 @@
 import {baseUrl, popularTopicsArr} from './data.js'
 import {carouselButtons} from './carousel.js'
-// import {getNextQuote} from './index.js'
+import {makeTopicsGrid, quoteCardHtml, getNextQuote} from './main_functions.js'
 
 const get = element => document.getElementById(element);
 
@@ -8,6 +8,7 @@ const get = element => document.getElementById(element);
 const open = get("menu-btn")
 const nav = get("nav")
 const exit = get("exit-btn")
+const popularTopics = get("popular-topics")
 
 const flexCardsCollection = document.getElementsByClassName("flex-card")
 
@@ -40,46 +41,11 @@ exit.addEventListener("click", () => {
 
 // POPULAR TOPICS
 
-const popularTopics = get("popular-topics")
+// STEP 1. Display topic cards
 
-// Display topic cards
+makeTopicsGrid(popularTopicsArr, popularTopics)
 
-makeTopicsGrid()
-
-function makeTopicsGrid() {
-    popularTopicsArr.forEach(topic => {
-        popularTopics.innerHTML += `<div class="flex-card">
-            <p>${topic}</p>
-        </div>`
-    })
-}
-
-function topicQuoteHtml(data) {
-
-    popularTopics.innerHTML = `<div id="quote-block" class="quote-block">
-        <p class="quote" id="quote">"${data.content}"</p>
-        <div class="author">
-            <img src="images/palm.png">
-            <p id="author">${data.author}</p>
-        </div>
-    </div>
-    <div id="btn-block" class="btn-block">
-        <a id="back-popular-topics" href="popular_topics.html" class="btn">Go back</a>
-    </div>    
-    `
-    const btnBlock = get("btn-block")
-
-    if(topicQuotesArr.length > 1){
-        btnBlock.innerHTML += `
-        <button id="next-quote-btn" class="btn">Next quote</button>
-        `
-        getNextQuote(topicQuotesArr)
-    } 
-
-    popularTopics.classList.remove("flex-container")
-    popularTopics.classList.add("quote-card")
-}
-
+// STEP 2. Access all of the cards and add event listeners
 
 let topicQuotesArr = []
 const topicName = get("topic-name")
@@ -94,46 +60,22 @@ function getTopicQuotes() {
                 .then(response => response.json())
                 .then(data => {
                     topicQuotesArr = data.results
-                    topicQuoteHtml(topicQuotesArr[0])
+                    quoteCardHtml(topicQuotesArr, cardName, "popular_topics.html")
                 })
-                
-                topicName.textContent = `${cardName} Quotes`
-                topicName.classList.remove("hidden")
         })
     })
 }
 
 getTopicQuotes()
 
-const backPopularTopics = get("get-popular-topics")
+// STEP 3. Render a quote-block and "Go back" "Next quote" buttons
 
-backPopularTopics?.addEventListener("click", function () {
-    topicName.classList.add("hidden")
-})
+// function topicQuoteHtml(data) {
 
 
 
-function getNextQuote(data) {
-    const nextQuoteBtn = get("next-quote-btn")
-    const quote = get("quote")
-    const author = get("author")
+// const backPopularTopics = get("get-popular-topics")
 
-    let nextQuote = data.shift()
-    let nextQuoteIndex = 0
-
-    nextQuoteBtn.addEventListener("click", () => {
-        
-        if (nextQuoteIndex === 0) {
-            nextQuote = data.shift()
-        }
-
-        quote.innerHTML = `"${nextQuote.content}"`
-        author.innerHTML = `${nextQuote.author}`
-
-        nextQuote = data.shift()
-        if (!nextQuote) {
-            nextQuoteBtn.disabled = true
-        }
-        nextQuoteIndex++
-    }) 
-}
+// backPopularTopics?.addEventListener("click", function () {
+//     topicName.classList.add("hidden")
+// })
