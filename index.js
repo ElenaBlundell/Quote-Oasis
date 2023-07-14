@@ -1,6 +1,6 @@
 import {allTopicsArr, baseUrl} from './data.js'
 import {carouselButtons} from './carousel.js'
-import {quoteCardHtml, getTopicQuotes} from './main_functions.js'
+import {quoteCardHtml, getTopicQuotes, makeCardsGrid, getCards} from './main_functions.js'
 
 const get = element => document.getElementById(element)
 
@@ -114,50 +114,29 @@ function searchAuthor(){
 }
 
 // Step 2.QUOTES. Get an array of quotes for a searched topic   
-
 // getTopicQuotes(topicSearchResult, "index.html")
    
-
 // Step 3.QUOTES. Display a quote for a surched topic
+// quoteCardHtml(topicQuotesArr, topic, page)
 
 
 // Step 2.AUTHORS. Display a list of options for a surched author
 
-let authorsCardsList
-
 function authorsListHtml() {
     main.innerHTML = `<div id="authors-list" class="flex-container"></div>`
-    authorsCardsList = get("authors-list")
-    authorsSearchResult.forEach(author => {
-        authorsCardsList.innerHTML += `<div class="flex-card">
-                                            <p>${author}</p>
-                                       </div>`
-    })
-    getAuthorQuotes()
+    const authorsCardsList = get("authors-list")
+    makeCardsGrid(authorsSearchResult, authorsCardsList)
+
+    // Step 3.AUTHORS.  Access all of the cards and add event listeners
+    getCards(authorsSearchResult, "index.html", "author")
 }
 
-// Step 3.AUTHORS. Get a quote from a chosen(clicked on) author
+// STEP 4. Fetch data for a chosen author
+// getAuthorQuotes(author, page)
 
-let authorQuotesArr = []
+// STEP 5. Render a quote-block and "Go back" "Next quote" buttons
+// quoteCardHtml(authorQuotesArr, author, page)
 
-function getAuthorQuotes() {
-    let authorsCardsCollection = document.getElementsByClassName("flex-card")
-    const authorsCardsArr = Array.from(authorsCardsCollection)
-    authorsCardsArr.forEach(card => {
-        card.addEventListener("click", () => {
-            const author = authorsSearchResult[authorsCardsArr.indexOf(card)]
-            fetch(`https://api.quotable.io/quotes?author=${author}`)
-                .then(response => response.json())
-                .then(data => {
-                    authorQuotesArr = data.results
-                    if(authorQuotesArr.length !== 0){
-                        quoteCardHtml(authorQuotesArr, author, "index.html" )
-                    }
-                    
-                })
-        })
-    })
-}
 
 // GET A RANDOM QUOTE
 

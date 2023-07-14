@@ -1,6 +1,6 @@
 import {allTopicsArr} from './data.js'
 import {carouselButtons} from './carousel.js'
-import {flexCardsCollection, makeTopicsGrid, getCards} from './main_functions.js'
+import {flexCardsCollection, makeCardsGrid, getCards} from './main_functions.js'
 
 const get = element => document.getElementById(element);
 
@@ -35,11 +35,9 @@ exit.addEventListener("click", () => {
     carouselButtons.style.visibility = "visible"
 })
 
-// ALL TOPICS
-
 // STEP 1. Display all topics cards
 
-makeTopicsGrid(allTopicsArr, allTopics)
+makeCardsGrid(allTopicsArr, allTopics)
 
 // STEP 2. Access all of the cards and add event listeners
 

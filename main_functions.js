@@ -1,14 +1,31 @@
 import {baseUrl} from './data.js'
 
-
 const get = element => document.getElementById(element);
 
-function makeTopicsGrid(arr, section) {
+// Display topics/authors cards (used in )
+
+function makeCardsGrid(arr, section) {
     arr.forEach(itemName => {
         section.innerHTML += `<div class="flex-card">
             <p>${itemName}</p>
         </div>`
     })
+}
+
+// Fetch data for a chosen topic
+
+function getTopicQuotes(topic, page){
+    let topicQuotesArr = []
+    fetch(`${baseUrl}/quotes?tags=${topic}&limit=150`)
+                .then(response => response.json())
+                .then(data => {
+                    topicQuotesArr = data.results
+                    if( topic === "Famous Quotes") {
+                        const lastIndex = topic.lastIndexOf(" ");
+                        topic = topic.substring(0, lastIndex);
+                    }
+                    quoteCardHtml(topicQuotesArr, topic, page)
+                })
 }
 
 // Display a quote for a chosen topic/author
@@ -79,31 +96,29 @@ function getNextQuote(data) {
 
 const flexCardsCollection = document.getElementsByClassName("flex-card")
 
-function getCards(arr, page) {
+function getCards(arr, page, author) {
     const flexCardsArr = Array.from(flexCardsCollection)
     flexCardsArr.forEach(card => {
         let cardName = arr[flexCardsArr.indexOf(card)]
         card.addEventListener("click", () => {
-
-            getTopicQuotes(cardName, page)
+            // ((JSON.stringify(arr) === JSON.stringify(favoriteAuthorsArr) || 
+            // (JSON.stringify(arr) === JSON.stringify(authorsSearchResult)) ? getAuthorQuotes(cardName, page) 
+            //                                                               : getTopicQuotes(cardName, page)
+            (author) ? getAuthorQuotes(cardName, page) : getTopicQuotes(cardName, page)
         })
     })
 }
 
-// Fetch data for a chosen topic
+// Fetch data for a chosen author
 
-function getTopicQuotes(topic, page){
-    let topicQuotesArr = []
-    fetch(`${baseUrl}/quotes?tags=${topic}&limit=150`)
+function getAuthorQuotes(author, page) {
+    let authorQuotesArr = []
+            fetch(`https://api.quotable.io/quotes?author=${author}`)
                 .then(response => response.json())
                 .then(data => {
-                    topicQuotesArr = data.results
-                    if( topic === "Famous Quotes") {
-                        const lastIndex = topic.lastIndexOf(" ");
-                        topic = topic.substring(0, lastIndex);
-                    }
-                    quoteCardHtml(topicQuotesArr, topic, page)
+                    authorQuotesArr = data.results
+                    quoteCardHtml(authorQuotesArr, author, page)
                 })
 }
 
-export {makeTopicsGrid, getTopicQuotes, quoteCardHtml, getNextQuote, flexCardsCollection, getCards}
+export {makeCardsGrid, getTopicQuotes, quoteCardHtml, getNextQuote, flexCardsCollection, getCards}
