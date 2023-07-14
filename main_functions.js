@@ -2,13 +2,27 @@ import {baseUrl} from './data.js'
 
 const get = element => document.getElementById(element);
 
-// Display topics/authors cards (used in )
+// Display topics/authors cards
 
 function makeCardsGrid(arr, section) {
     arr.forEach(itemName => {
         section.innerHTML += `<div class="flex-card">
             <p>${itemName}</p>
         </div>`
+    })
+}
+
+// Access all of the cards and add event listeners
+
+const flexCardsCollection = document.getElementsByClassName("flex-card")
+
+function getCards(arr, page, author) {
+    const flexCardsArr = Array.from(flexCardsCollection)
+    flexCardsArr.forEach(card => {
+        let cardName = arr[flexCardsArr.indexOf(card)]
+        card.addEventListener("click", () => {
+            (author) ? getAuthorQuotes(cardName, page) : getTopicQuotes(cardName, page)
+        })
     })
 }
 
@@ -89,23 +103,6 @@ function getNextQuote(data) {
             nextQuoteBtn.disabled = true
         }
         nextQuoteIndex++
-    })
-}
-
-// Access all of the cards and add event listeners
-
-const flexCardsCollection = document.getElementsByClassName("flex-card")
-
-function getCards(arr, page, author) {
-    const flexCardsArr = Array.from(flexCardsCollection)
-    flexCardsArr.forEach(card => {
-        let cardName = arr[flexCardsArr.indexOf(card)]
-        card.addEventListener("click", () => {
-            // ((JSON.stringify(arr) === JSON.stringify(favoriteAuthorsArr) || 
-            // (JSON.stringify(arr) === JSON.stringify(authorsSearchResult)) ? getAuthorQuotes(cardName, page) 
-            //                                                               : getTopicQuotes(cardName, page)
-            (author) ? getAuthorQuotes(cardName, page) : getTopicQuotes(cardName, page)
-        })
     })
 }
 
