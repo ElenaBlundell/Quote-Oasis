@@ -254,6 +254,27 @@ header .top {
     background-image: url("images/plant-3.jpeg");
 }
 
+.alert {
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    background-color: #2C3333;
+    width: 40%;
+    height: 9.5em;
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 1em;
+    /* display: none; */
+}
+
+.inner-message {
+    color: #CBE4DE;
+    text-align: center;
+    border: 1px solid #CBE4DE;
+    border-radius: 10px;
+    padding: 1em;
+}
+
 main {
     display: flex;
     flex-direction: column;
