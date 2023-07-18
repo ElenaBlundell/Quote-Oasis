@@ -8,6 +8,10 @@ const get = element => document.getElementById(element)
 const main = get("main")
 const quoteBlock = get("quote-block")
 const quoteBtn = get("get-quote-btn")
+const alert = get("alert")
+const body = get("body")
+const header = get("header")
+const carousel = get("carousel")
 
 // HEADER
 const searchIcon = get("search-icon")
@@ -110,7 +114,24 @@ function searchAuthor(){
             authorsSearchResult.push(authorsList[lowerCaseAuthorsList.indexOf(author)])
         }
     })
-    return (authorsSearchResult.length !== 0) ? authorsListHtml() : alert(`No quotes for your request were found`)
+    return (authorsSearchResult.length !== 0) ? authorsListHtml() : displayAlert()
+}
+
+function displayAlert() {
+    main.style.visibility = "hidden"
+    alert.style.display = "inline"
+    header.style.opacity = "0.3"
+    carousel.style.opacity = "0.3"
+    searchBtn.disabled = true
+    body.addEventListener("click", hideAlert)
+}
+
+function hideAlert() {
+    searchBtn.disabled = false
+    main.style.visibility = "visible"
+    header.style.opacity = "1"
+    carousel.style.opacity = "1"
+    alert.style.display = "none"
 }
 
 // Step 2.QUOTES. Get an array of quotes for a searched topic   

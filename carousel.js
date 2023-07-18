@@ -2,7 +2,6 @@ import {baseUrl} from './data.js'
 
 const get = element => document.getElementById(element)
 
-// const carousel = get("carousel")
 const slides = document.getElementsByClassName('carousel-item')
 let slidePosition = 0
 const totalSlides = slides.length
