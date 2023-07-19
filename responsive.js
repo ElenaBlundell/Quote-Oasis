@@ -13,7 +13,6 @@ const mediaQueryLarge = window.matchMedia("(min-width: 750px)")
 
 function handleScreenChangeSmall(e) {
     if (e.matches) {
-        // console.log("It is small now!")
         imgQuote2.classList.remove("carousel-item-visible")
         logo.style.fontSize = "2rem"
     }
@@ -21,7 +20,6 @@ function handleScreenChangeSmall(e) {
 
 function handleScreenChangeMedium(e) {
     if (e.matches) {
-        // console.log("Media Query Matched Medium!")
         imgQuote2.classList.add("carousel-item-visible")
         logo.style.fontSize = "2.5rem"
     }
@@ -29,7 +27,6 @@ function handleScreenChangeMedium(e) {
 
 function handleScreenChangeMediumL(e) {
     if (e.matches) {
-        // console.log("it is mL now")
         imgQuote3.classList.remove("carousel-item-visible")
         carouselButtons.style.visibility = "visible"
     }
@@ -37,7 +34,6 @@ function handleScreenChangeMediumL(e) {
 
 function handleScreenChangeLarge(e) {
     if (e.matches) {
-        // console.log("It's large now")
         imgQuote3.classList.add("carousel-item-visible")
         carouselButtons.style.visibility = "hidden"
     }

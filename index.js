@@ -117,6 +117,8 @@ function searchAuthor(){
     return (authorsSearchResult.length !== 0) ? authorsListHtml() : displayAlert()
 }
 
+// Alert message
+
 function displayAlert() {
     main.style.visibility = "hidden"
     alert.style.display = "inline"
@@ -146,8 +148,7 @@ function hideAlert() {
 // Step 2.AUTHORS. Display a list of options for a surched author
 
 function authorsListHtml() {
-    main.innerHTML = `<div id="authors-list" class="flex-container"></div>`
-    const authorsCardsList = get("authors-list")
+    main.innerHTML = `<section id="content-section" class="flex-container"></section>`
     makeCardsGrid(authorsSearchResult, authorsCardsList)
 
     // Step 3.AUTHORS.  Access all of the cards and add event listeners

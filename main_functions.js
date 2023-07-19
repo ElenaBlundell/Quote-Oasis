@@ -4,9 +4,10 @@ const get = element => document.getElementById(element);
 
 // Display topics/authors cards
 
-function makeCardsGrid(arr, section) {
+function makeCardsGrid(arr) {
+    const contentSection = get("content-section")
     arr.forEach(itemName => {
-        section.innerHTML += `<div class="flex-card">
+        contentSection.innerHTML += `<div class="flex-card">
             <p>${itemName}</p>
         </div>`
     })

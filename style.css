@@ -120,7 +120,6 @@ a {
 header {
     background-color: #2C3333;
     height: 20vh;
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -146,7 +145,6 @@ header .top {
 
 .carousel {
     display: flex;
-    text-align: center;
     height: 25%;
     margin-bottom: 1em;
     color: #CBE4DE;
@@ -269,7 +267,6 @@ header .top {
 
 .inner-message {
     color: #CBE4DE;
-    text-align: center;
     border: 1px solid #CBE4DE;
     border-radius: 10px;
     padding: 1em;
@@ -291,7 +288,6 @@ h2 {
 .quote-block {
     background-color: #0E8388;
     color: #CBE4DE;
-    text-align: center;
     width: 90%;
     max-width: 500px;
     border-radius: 20px;

@@ -1,43 +1,9 @@
 import {allTopicsArr} from './data.js'
-import {carouselButtons} from './carousel.js'
-import {flexCardsCollection, makeCardsGrid, getCards} from './main_functions.js'
-
-const get = element => document.getElementById(element);
-
-const open = get("menu-btn")
-const nav = get("nav")
-const exit = get("exit-btn")
-const allTopics = get("all-topics")
-
-const carousel = get("carousel")
-
-open.addEventListener("click", () => {
-    const flexCardsArr = Array.from(flexCardsCollection)
-    nav.classList.add("open-nav")
-    carouselButtons.style.visibility = "hidden"
-    flexCardsArr.forEach(card => {
-        card.classList.add("disabled")
-    })
-    let btnCollection = document.getElementsByClassName("btn")
-    const btnArr = Array.from(btnCollection)
-    btnArr.forEach(btn => btn.classList.add("disabled"))
-})
-
-exit.addEventListener("click", () => {
-    nav.classList.remove('open-nav')
-    const flexCardsArr = Array.from(flexCardsCollection)
-    flexCardsArr.forEach(card => {
-        card.classList.remove("disabled")
-    })
-    let btnCollection = document.getElementsByClassName("btn")
-    const btnArr = Array.from(btnCollection)
-    btnArr.forEach(btn => btn.classList.remove("disabled"))
-    carouselButtons.style.visibility = "visible"
-})
+import {makeCardsGrid, getCards} from './main_functions.js'
 
 // STEP 1. Display all topics cards
 
-makeCardsGrid(allTopicsArr, allTopics)
+makeCardsGrid(allTopicsArr)
 
 // STEP 2. Access all of the cards and add event listeners
 
