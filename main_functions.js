@@ -58,7 +58,7 @@ function quoteCardHtml(data, name, page) {
     const topicName = get("topic-name")
     const quoteBlock = get("quote-block")
 
-    topicName.textContent = `${name} Quotes`
+    topicName.textContent = `${name.toUpperCase()} QUOTES`
     topicName.classList.remove("hidden")
 
     quoteBlock.innerHTML = `

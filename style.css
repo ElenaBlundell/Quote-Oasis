@@ -100,7 +100,7 @@ nav {
     text-align: left;
     color: #CBE4DE;
     padding-left: 2em;
-    z-index: 1;
+    z-index: 2;
 }
 
 li {
@@ -119,13 +119,13 @@ a {
 
 header {
     background-color: #2C3333;
-    height: 20vh;
+    height: 16vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* position: relative;
-    z-index: 10; */
-    /* box-shadow: 0px 8px 7.4564px #2C3333; */
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 8px 7.4564px #2C3333;
 }
 
 header .top {
@@ -145,7 +145,7 @@ header .top {
 
 .carousel {
     display: flex;
-    height: 25%;
+    height: 26%;
     margin-bottom: 1em;
     color: #CBE4DE;
     position: relative;
@@ -224,7 +224,7 @@ header .top {
     background-blend-mode: multiply;
     background-size: cover;
     font-size: 0.9rem;
-    padding: 0.5em 1.5em;
+    padding: 1.5em 1.5em;
     /* box-shadow: 0 20px 6em inset #CBE4DE; */
     /* display: flex;
     flex-direction: column;
@@ -277,7 +277,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 2em auto;
     max-width: 900px;
 }
 
@@ -318,7 +318,6 @@ h2 {
     flex: 1 0 30%;
     margin-top: 0.3em;
     margin-right: 0.5em;
-    text-align: center;
     font-size: 0.9rem;
 }
 
