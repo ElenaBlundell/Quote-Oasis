@@ -122,12 +122,14 @@ function displayAlert() {
     alert.style.display = "inline"
     header.style.opacity = "0.3"
     carousel.style.opacity = "0.3"
-    searchBtn.disabled = true
+    searchBtn.classList.add("disabled")
+    open.classList.add("disabled")
     body.addEventListener("click", hideAlert)
 }
 
 function hideAlert() {
-    searchBtn.disabled = false
+    searchBtn.classList.remove("disabled")
+    open.classList.remove("disabled")
     main.style.visibility = "visible"
     header.style.opacity = "1"
     carousel.style.opacity = "1"
