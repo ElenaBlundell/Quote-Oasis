@@ -149,7 +149,7 @@ function hideAlert() {
 
 function authorsListHtml() {
     main.innerHTML = `<section id="content-section" class="flex-container"></section>`
-    makeCardsGrid(authorsSearchResult, authorsCardsList)
+    makeCardsGrid(authorsSearchResult)
 
     // Step 3.AUTHORS.  Access all of the cards and add event listeners
     getCards(authorsSearchResult, "index.html", "author")

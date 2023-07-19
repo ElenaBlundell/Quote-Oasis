@@ -47,6 +47,8 @@ function getTopicQuotes(topic, page){
 
 function quoteCardHtml(data, name, page) {
 
+    name = name.charAt(0).toUpperCase() + name.slice(1)
+
     main.innerHTML = `<h2 id="topic-name" class="hidden"></h2>`
     
     if(!get("quote-block")){
@@ -58,7 +60,7 @@ function quoteCardHtml(data, name, page) {
     const topicName = get("topic-name")
     const quoteBlock = get("quote-block")
 
-    topicName.textContent = `${name.toUpperCase()} QUOTES`
+    topicName.textContent = `${name} Quotes`
     topicName.classList.remove("hidden")
 
     quoteBlock.innerHTML = `
@@ -70,7 +72,7 @@ function quoteCardHtml(data, name, page) {
     `
     
     const btnBlock = get("btn-block")
-    btnBlock.innerHTML = `<a href=${page} class="btn">Go back</a>`
+    btnBlock.innerHTML = `<button class="btn"><a href=${page} ">Go back</a></button>`
 
     if(data.length > 1){
             btnBlock.innerHTML += `
