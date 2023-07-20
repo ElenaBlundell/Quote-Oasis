@@ -1,3 +1,4 @@
+// import {navHtml, carouselHtml} from './page_blocks.js'
 import {allTopicsArr, baseUrl} from './data.js'
 import {carouselButtons} from './carousel.js'
 import {quoteCardHtml, getTopicQuotes, makeCardsGrid, getCards} from './main_functions.js'
@@ -11,7 +12,11 @@ const quoteBtn = get("get-quote-btn")
 const alert = get("alert")
 const body = get("body")
 const header = get("header")
-const carousel = get("carousel")
+
+// Building the page
+
+// body.insertAdjacentHTML("afterbegin", navHtml)
+// alert.insertAdjacentHTML("beforebegin", carouselHtml)
 
 // HEADER
 const searchIcon = get("search-icon")
@@ -24,6 +29,7 @@ searchIcon.addEventListener("click", () => {
 const open = get("menu-btn")
 const nav = get("nav")
 const exit = get("exit-btn")
+const carousel = get("carousel")
 
 open.addEventListener("click", () => {
     nav.classList.add("open-nav")
