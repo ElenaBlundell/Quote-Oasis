@@ -12,7 +12,7 @@ allTopicsArr.sort()
 
 const favoriteAuthorsArr = ["Dalai Lama", "Albert Einstein", "Theodore Roosevelt",
                          "Ernest Hemingway", "Abraham Lincoln", "Maya Angelou", "Henry Ford",
-                        "Oscar Wilde", "Dr. Seuss"]
+                        "Oscar Wilde", "Thomas Edison"]
 favoriteAuthorsArr.sort()
 
 export {baseUrl, popularTopicsArr, allTopicsArr, favoriteAuthorsArr}

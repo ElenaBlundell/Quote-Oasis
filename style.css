@@ -20,6 +20,24 @@ body {
     visibility: hidden;
 }
 
+/* HEADER */
+
+header {
+    background-color: #2C3333;
+    height: 16vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+header .top {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+}
+
 #menu-btn,
 #search-icon {
     width: 1.5em;
@@ -37,6 +55,8 @@ body {
 h2 {
     font-family: 'Berkshire Swash', cursive;
 }
+
+/* SEARCH CONTAINER */
 
 .search-container {
     align-self: center;
@@ -71,18 +91,35 @@ h2 {
     transform: scale(1.1);
 }
 
-.inner-wrapper {
+/* NAV  */
+
+.exit-btn {
     margin-left: -20px;
     margin-top: 2.5em;
-    margin-bottom: 2.5em;
+    margin-bottom: 3em;
+    color: #CBE4DE;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
-.inner-wrapper img {
+.exit-btn img {
     height: 1em;
     margin: 0 1em;
+}
+
+.exit-btn:hover,
+.exit-btn:focus {
+    transform: scale(1.2)
+}
+
+.open-nav {
+    visibility: unset;
+    opacity: 1;
+    transform: translateX(0);
 }
 
 nav {
@@ -118,31 +155,7 @@ a {
     color: #CBE4DE;
 }
 
-header {
-    background-color: #2C3333;
-    height: 16vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    /* position: relative;
-    z-index: 2;
-    box-shadow: 0px 8px 7.4564px #2C3333; */
-}
-
-header .top {
-    width: 90%;
-    max-width: 800px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: center;
-}
-
-.open-nav {
-    visibility: unset;
-    opacity: 1;
-    transform: translateX(0);
-}
+/* CAROUSEL */
 
 .carousel {
     display: flex;
@@ -250,6 +263,15 @@ header .top {
     background-image: url("images/plant-3.jpeg");
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2em auto;
+    max-width: 900px;
+}
+
 .alert {
     display: none;
     position: fixed;
@@ -269,15 +291,6 @@ header .top {
     border: 1px solid #CBE4DE;
     border-radius: 10px;
     padding: 1em;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2em auto;
-    max-width: 900px;
 }
 
 h2 {
@@ -314,11 +327,11 @@ h2 {
 }
 
 .flex-card {
-    padding: 0.2em 2em;
+    padding: 1.3em 2em;
     flex: 1 0 30%;
-    margin-top: 0.3em;
+    margin-top: 0.5em;
     margin-right: 0.5em;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .btn,
@@ -335,10 +348,15 @@ h2 {
 }
 
 .btn:hover,
-.btn:active,
+.btn:focus,
 .flex-card:hover {
-    transform: translateY(-2px);
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #2C3333 0 -3px 0 inset;
+    transform: translateY(-3px);
+    box-shadow: #2E4F4F 0 4px 8px, #2E4F4F 0 7px 13px -3px, #2C3333 0 -3px 0 inset;
+}
+
+.flex-card:hover,
+.flex-card:focus {
+    transform: scale(1.1);
 }
 
 .btn:disabled {

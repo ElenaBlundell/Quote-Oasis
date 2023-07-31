@@ -7,9 +7,9 @@ const get = element => document.getElementById(element);
 function makeCardsGrid(arr) {
     const contentSection = get("content-section")
     arr.forEach(itemName => {
-        contentSection.innerHTML += `<div class="flex-card">
-            <p>${itemName}</p>
-        </div>`
+        contentSection.innerHTML += `<button class="flex-card">
+            ${itemName}
+        </button>`
     })
 }
 
