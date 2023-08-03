@@ -94,7 +94,7 @@ h2 {
 /* NAV  */
 
 .exit-btn {
-    margin-left: -20px;
+/*     margin-left: 20px; */
     margin-top: 2.5em;
     margin-bottom: 3em;
     color: #CBE4DE;
@@ -128,7 +128,7 @@ nav {
     height: 100vh;
     left: 0;
     top: 0;
-    width: 40%;
+    width: 50%;
     min-width: 150px;
     max-width: 300px;
     visibility: hidden;
