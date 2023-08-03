@@ -94,12 +94,12 @@ h2 {
 /* NAV  */
 
 .exit-btn {
-/*     margin-left: 20px; */
     margin-top: 2.5em;
     margin-bottom: 3em;
     color: #CBE4DE;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     background-color: transparent;
     border: none;
     font-size: 1rem;
