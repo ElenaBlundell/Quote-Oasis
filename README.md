@@ -1,7 +1,8 @@
 <h1>Quote Oasis</h1>
 
 <p>This is an application, that allows users to find quotes based on topics or authors.<br>
-    It can also show a user random quotes.</p>
+    It can also show a user random quotes. <br>
+    It's using <a href="https://github.com/lukePeavey/quotable">Quotable</a> - free, open source quotations API to fetch quote data and display it dynamically on the frontend.</p>
 <p>It has 4 pages:</p>
 <ul>
   <li><b>Home page</b></li>
@@ -17,6 +18,15 @@
     <p>There is a list of cards of popular authors on this page.<br>
         Click on a card of a chosen author and see all quotes by that author, one by one.</p>
 </ul>
-  
+
+<h2>Features</h2>
+<ul>
+    <li>Carousel of slides</li>
+        <p></p>
+    <li>Search Bar</li>
+        <p></p>
+    <li>Hidden Navigation Menu</li>
+        <p></p>
+</ul>
   
 
