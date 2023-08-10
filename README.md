@@ -3,7 +3,16 @@
 <p>This is an application, that allows users to find quotes based on topics or authors.<br>
     It can also show a user random quotes. <br>
     It's using <a href="https://github.com/lukePeavey/quotable">Quotable</a> - free, open source quotations API to fetch quote data and display it dynamically on the frontend.</p>
-<p>It has 4 pages:</p>
+
+<h2>Built with:</h2>
+<ul>
+    <li>HTML5</li>
+    <li>CSS3</li>
+    <li>JavaScript</li>
+    <li>Web API</li>
+</ul>
+
+<h2>It has 4 pages:</h2>
 <ul>
   <li><b>Home page</b></li>
     <p>On this page a user can use the search bar to find quotes by tags, authors, or .<br>
@@ -27,6 +36,14 @@
         <p>Search allows a user to find quotes by tags, authors, or common words in a quote.</p>
     <li><b>Hidden Navigation Menu</b></li>
         <p>The navigation menu can be opened and closed by clicking on a menu button</p>
+</ul>
+
+<h2>Features I hope to implement in the feature:</h2>
+<ul>
+    <li>Allow a user to add quotes that he liked to a list of favorites (10 maximum).</li>
+    <li>Add a page with a list of authors, their portraits, and short biographies.</li>
+    <li>Make it possible to close the navigation menu by clicking outside of it.</li>
+    <li>Add Amazon Ads</li>
 </ul>
   
 
