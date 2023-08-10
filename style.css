@@ -48,7 +48,6 @@ header .top {
 .logo {
     font-size: 2.5rem;
     margin: 0 1em;
-    color: #CBE4DE;
 }
 
 .logo,
@@ -67,7 +66,6 @@ h2 {
 #search-bar {
     padding: 1em;
     border: 1px solid #CBE4DE;
-    color: #CBE4DE;
     border-radius: 5px;
     background: transparent;
     width: 77%;
@@ -94,9 +92,9 @@ h2 {
 /* NAV  */
 
 .exit-btn {
-    margin-left: -20px;
     margin-top: 2.5em;
     margin-bottom: 3em;
+    font-family: 'Montserrat', sans-serif;
     color: #CBE4DE;
     display: flex;
     align-items: center;
@@ -108,7 +106,7 @@ h2 {
 
 .exit-btn img {
     height: 1em;
-    margin: 0 1em;
+    margin-right: 1em;
 }
 
 .exit-btn:hover,
@@ -129,25 +127,22 @@ nav {
     left: 0;
     top: 0;
     width: 40%;
-    min-width: 150px;
+    min-width: 200px;
     max-width: 300px;
     visibility: hidden;
     transform: translateX(-50%);
     opacity: 0;
     transition: all .3s;
     text-align: left;
-    color: #CBE4DE;
-    padding-left: 2em;
-    z-index: 3;
+    padding: 0 2em;
+    z-index: 2;
 }
 
 li {
     list-style: url("./images/palm.png");
-    margin-left: -10px;
     margin-bottom: 1em;
     margin-right: 0.7em;
     font-size: 1rem;
-    color: #CBE4DE;
 }
 
 a {
@@ -161,7 +156,6 @@ a {
     display: flex;
     height: 26%;
     margin-bottom: 1em;
-    color: #CBE4DE;
     position: relative;
     z-index: 1;
     box-shadow: 0px 8px 8px #2C3333;
@@ -186,7 +180,7 @@ a {
     opacity: 0.4;
     font-weight: bold;
     border-radius: 11px;
-    color: #e0e0e0;
+    color: #CBE4DE;
     background-color: transparent;
 }
 
@@ -287,7 +281,6 @@ main {
 }
 
 .inner-message {
-    color: #CBE4DE;
     border: 1px solid #CBE4DE;
     border-radius: 10px;
     padding: 1em;
@@ -299,7 +292,6 @@ h2 {
 
 .quote-block {
     background-color: #0E8388;
-    color: #CBE4DE;
     width: 90%;
     max-width: 500px;
     border-radius: 20px;
