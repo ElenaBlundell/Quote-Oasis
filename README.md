@@ -21,7 +21,7 @@
 
 <h2> Special Features</h2>
 <ul>
-    <li><b>Carousel of slides</b></li>
+    <li><b>Carousel of Slides</b></li>
         <p>Each slide shows a random quote, generated when the page is loaded. </p>
     <li><b>Search Bar</b></li>
         <p>Search allows a user to find quotes by tags, authors, or common words in a quote.</p>
