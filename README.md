@@ -14,7 +14,8 @@
     <p>On this page there is a list of cards of all existing (in this API) topics.<br>
         A user can click on a topic card and see all of the quotes related to that topic.</p>
   <li><b>Popular Authors</b></li>
-    <p>There is a list of cards of popular authors on this page. Click on a card of a chosen author and see all quotes by that author, one by one.</p>
+    <p>There is a list of cards of popular authors on this page.<br>
+        Click on a card of a chosen author and see all quotes by that author, one by one.</p>
 </ul>
   
   
