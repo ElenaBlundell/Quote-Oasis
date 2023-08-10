@@ -4,7 +4,7 @@
     It can also show a user random quotes.</p>
 <p>It has 4 pages:</p>
 <ul>
-  <li><bold>Home page</bold></li>
+  <li><b>Home page</b></li>
     <p>On this page a user can use the search bar to find quotes by tags or authors. Also, a user can get a random quote</p>
   <li>Popular Topics</li>
     <p>There is a list of cards of popular topics on this page. By clicking on a card of a chosen topic a user can see all quotes related to that topic, one by one.</p>
