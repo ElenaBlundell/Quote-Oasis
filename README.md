@@ -5,11 +5,14 @@
 <p>It has 4 pages:</p>
 <ul>
   <li><h4>Home page</h4></li>
-  <p>On this page a user can use search bar to find quotes by tags or authors</p>
+    <p>On this page a user can use the search bar to find quotes by tags or authors. Also, a user can get a random quote</p>
   <li>Popular Topics</li>
+    <p>There is a list of cards of popular topics on this page. By clicking on a card of a chosen topic a user can see all quotes related to that topic, one by one.</p>
   <li>All Topics</li>
+    <p>There is a list of cards of all existing topics on this page. By clicking on a card of a chosen topic a user can see all quotes related to that topic, one by one.</p>
   <li>Popular Authors</li>
+    <p>There is a list of cards of popular authors on this page. By clicking on a card of a chosen author a user can see all quotes by that author, one by one.</p>
 </ul>
   
   
- Integrated a third-party API to fetch quote data and displayed it dynamically on the frontend. Implemented responsive design using JavaScript to ensure optimal user experience on various devices.
+
