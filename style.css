@@ -127,13 +127,8 @@ nav {
     height: 100vh;
     left: 0;
     top: 0;
-<<<<<<< HEAD
     width: 40%;
     min-width: 200px;
-=======
-    width: 50%;
-    min-width: 150px;
->>>>>>> 34f910ffa9e01d2a7a6950e5aa38c8b499ac5cc0
     max-width: 300px;
     visibility: hidden;
     transform: translateX(-50%);
