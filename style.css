@@ -72,7 +72,8 @@ h2 {
 }
 
 .search-container button,
-#search-bar:hover {
+#search-bar:hover,
+#search-bar:focus{
     padding: 1em;
     border: none;
     border-radius: 5px;
@@ -81,8 +82,9 @@ h2 {
 }
 
 .search-container button {
-    width: 20%;
-    padding: 1.04em 0;
+    width: 18%;
+    margin-left: 0.5em;
+    padding: 1.03em 0;
 }
 
 .search-container button:hover {
@@ -144,6 +146,10 @@ li {
     margin-bottom: 1em;
     margin-right: 0.7em;
     font-size: 1rem;
+}
+
+nav li:hover {
+    text-shadow: 1px 1px #CBE4DE;
 }
 
 a {
