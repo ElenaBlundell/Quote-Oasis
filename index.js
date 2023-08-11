@@ -76,7 +76,7 @@ function getAuthorsList(pageNum = 1) {
 // Step 1.1 QUOTES. Check if the search bar value is an existing topic
 
 searchBtn.addEventListener("click", function () {
-
+    searchBar.style.backgroundColor = "#CBE4DE"
     topicSearchResult = ""
 
     let lowerCaseTopicsArr= allTopicsArr.map(topic => topic.toLowerCase())
