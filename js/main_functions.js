@@ -66,7 +66,7 @@ function quoteCardHtml(data, name, page) {
     quoteBlock.innerHTML = `
             <p class="quote" id="quote">"${data[0].content}"</p>
             <div class="author">
-                <img src="images/palm.png">
+                <img src="../images/palm.png">
             <p id="author">${data[0].author}</p>
             </div>
     `

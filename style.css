@@ -341,14 +341,14 @@ h2 {
 }
 
 .btn:hover,
-.btn:focus,
+.btn:active,
 .flex-card:hover {
     transform: translateY(-3px);
     box-shadow: #2E4F4F 0 4px 8px, #2E4F4F 0 7px 13px -3px, #2C3333 0 -3px 0 inset;
 }
 
 .flex-card:hover,
-.flex-card:focus {
+.flex-card:active {
     transform: scale(1.1);
 }
 

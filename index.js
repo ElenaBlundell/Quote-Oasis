@@ -1,7 +1,7 @@
 // import {navHtml, carouselHtml} from './page_blocks.js'
-import {allTopicsArr, baseUrl} from './data.js'
-import {carouselButtons} from './carousel.js'
-import {quoteCardHtml, getTopicQuotes, makeCardsGrid, getCards} from './main_functions.js'
+import {allTopicsArr, baseUrl} from './js/data.js'
+import {carouselButtons} from './js/carousel.js'
+import {quoteCardHtml, getTopicQuotes, makeCardsGrid, getCards} from './js/main_functions.js'
 
 const get = element => document.getElementById(element)
 
@@ -12,11 +12,6 @@ const quoteBtn = get("get-quote-btn")
 const alert = get("alert")
 const body = get("body")
 const header = get("header")
-
-// Building the page
-
-// body.insertAdjacentHTML("afterbegin", navHtml)
-// alert.insertAdjacentHTML("beforebegin", carouselHtml)
 
 // HEADER
 const searchIcon = get("search-icon")
@@ -158,7 +153,7 @@ function authorsListHtml() {
     makeCardsGrid(authorsSearchResult)
 
     // Step 3.AUTHORS.  Access all of the cards and add event listeners
-    getCards(authorsSearchResult, "index.html", "author")
+    getCards(authorsSearchResult, "../index.html", "author")
 }
 
 // STEP 4. Fetch data for a chosen author

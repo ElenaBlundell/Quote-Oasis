@@ -51,7 +51,7 @@ const slidesArr = Array.from(slidesDom)
 function randomSlideQuote(){
     
     slidesArr.forEach(slide => {
-        fetch(`${baseUrl}/random?minLength=40&maxLength=50`)
+        fetch(`${baseUrl}/random?minLength=40&maxLength=60`)
             .then(res => res.json())
             .then(data => slide.innerHTML = getSlideQuoteHtml(data))
     })
@@ -62,7 +62,7 @@ randomSlideQuote()
 function getSlideQuoteHtml(data){
     return `<p class="quote">"${data.content}"</p>
             <div class="author">
-                <img src="images/palm.png">
+                <img src="../images/palm.png">
                 <p>${data.author}</p>
             </div>`
 }
