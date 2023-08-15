@@ -62,7 +62,7 @@ randomSlideQuote()
 function getSlideQuoteHtml(data){
     return `<p class="quote">"${data.content}"</p>
             <div class="author">
-                <img src="../images/palm.png">
+                <img src="https://github.com/ElenaBlundell/Quote-Oasis/blob/main/images/palm.png" alt="plant leaf">
                 <p>${data.author}</p>
             </div>`
 }
