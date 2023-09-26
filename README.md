@@ -6,7 +6,7 @@
 
 <h2>About</h2>
 
-<p>This is an application, that allows users to find quotes based on topics or authors.<br>
+<p>This is an application, that allows users to find quotes based on searched topics or authors.<br>
     It can also show a user random quotes. <br>
     It's using <a href="https://github.com/lukePeavey/quotable">Quotable</a> - free, open source quotations API to fetch quote data and display it dynamically on the frontend.</p>
 
