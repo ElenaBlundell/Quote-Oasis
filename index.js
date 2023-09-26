@@ -153,7 +153,7 @@ function authorsListHtml() {
     makeCardsGrid(authorsSearchResult)
 
     // Step 3.AUTHORS.  Access all of the cards and add event listeners
-    getCards(authorsSearchResult, "../index.html", "author")
+    getCards(authorsSearchResult, "index.html", "author")
 }
 
 // STEP 4. Fetch data for a chosen author
